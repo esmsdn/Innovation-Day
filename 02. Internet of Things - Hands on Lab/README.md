@@ -10,5 +10,16 @@ But first of all you will need to install your Intel Edison Board. You will need
 * A ssh client (like [putty](http://www.putty.org/))
 * The Intel Edison Drivers: [https://software.intel.com/en-us/iot/hardware/edison/downloads]
 
+Once installed you will have something like this in your device manager:
+
+![ports](images/ports.png)
+
+The red mark indicates the COM port you will need to setup in your ssh client:
+
+![putty](images/serial.png)
+
+
+
+
 
 
