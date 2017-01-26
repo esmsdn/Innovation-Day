@@ -42,7 +42,8 @@ Para más información visitar la siguiente
 
 ## PREPARACIÓN DEL PROYECTO
 
-1.	Primero creamos un proyecto de NodeJS donde albergaremos nuestro Bot. 
+### Paso 1
+Primero creamos un proyecto de NodeJS donde albergaremos nuestro Bot. 
 Para ello nos posicionamos en un directorio de trabajo y creamos un proyecto
  vacio de NodeJS con la siguientes instrucciones:
  ```powershell
@@ -58,7 +59,8 @@ Ahora en este punto disponemos de un proyecto vacío con soporte para NodeJS.
 A partir de aquí tendremos que empezar a cargar las dependencias necesarias para
  que el proyecto funcione con el Bot Framework y LUIS.
 
-2. En la misma consola y posicionados dentro del directorio de proyecto,
+### Paso 2
+En la misma consola y posicionados dentro del directorio de proyecto,
 cargaremos las dependencias del proyecto. Para ello utilizaremos las 
 siguientes instrucciones:
 ```powershell
@@ -74,7 +76,8 @@ En este punto, disponemos de un proyecto básico con las dependencias de
 Bot Framework y Restify incluidas y resueltas. 
 Ahora deberemos empezar a incluir el código básico de nuestra aplicación.
 
-3. Abrimos Visual Studio Code dentro del directorio de la solución. 
+### Paso 3
+Abrimos Visual Studio Code dentro del directorio de la solución. 
 Para ello, desde la línea de comandos, introducimos la siguiente instrucción:
 ```powershell
 C:\> code . 
@@ -90,7 +93,8 @@ podemos realizar desde dentro del editor, utilizando la opción `File>New File..
 
 ## GENERACIÓN DEL SERVIDOR WEB PARA EL BOT
 
-4.	Llegados a este punto, primeramente, hemos de crear una aplicación de
+### Paso 4
+Llegados a este punto, primeramente, hemos de crear una aplicación de
 API REST que responda a las interacciones con los usuarios a través de los
 diferentes canales. Para ello, dentro del fichero `server.js` incluiremos 
 el siguiente código:
@@ -130,7 +134,8 @@ Ahora disponemos de una aplicación REST API básica desarrollada con NodeJS
 que integra un Bot con diálogo básico `"Hello World!"`. Para comprobarlo 
 deberemos arrancar la aplicación web.
 
-5.	Dentro de la consola de comandos posicionada dentro del directorio de la
+### Paso 5
+Dentro de la consola de comandos posicionada dentro del directorio de la
 solución tecleamos la siguiente instrucción:
 ```powershell
 C:\botlab> node server.js
@@ -150,7 +155,8 @@ en la siguiente dirección:
 
 [Download Microsoft Bot Framwork Emulator](https://github.com/Microsoft/BotFramework-Emulator#download)  
 
-6.	Descargamos e instalamos el emulador, siguiendo las instrucciones de la
+### Paso 6
+Descargamos e instalamos el emulador, siguiendo las instrucciones de la
 página para los diferentes sistemas operativos soportados.
 
 _Se debe de tener en cuenta que el emulador se instalará dentro del menú de 
@@ -158,7 +164,8 @@ inicio en una opción denominada `Microsoft Corp`_
 
 ![Bot Framework Emulator en ejecución](./images/img1-step6.png)
 
-7. Con la aplicación web en ejecución (_ver paso 5_) conectamos el emulador 
+### Paso 7
+Con la aplicación web en ejecución (_ver paso 5_) conectamos el emulador 
 con ella utilizando la dirección [http://localhost:3978/api/messages](http://localhost:3978/api/messages)
 
 _Es importante tener en cuenta que no es necesario rellenar los campos de 
@@ -171,7 +178,8 @@ en el siguiente enlace las tenemos disponibles
 
 [Getting Started - Connect to a bot running on localhost](https://github.com/Microsoft/BotFramework-Emulator/wiki/Getting-Started#connect-to-a-bot-running-on-localhost)
 
-8. Probamos a interacturar con nuestro bot. Para ello introducimos un saludo en 
+### Paso 8
+Probamos a interacturar con nuestro bot. Para ello introducimos un saludo en 
 la caja de texto inferior del emulador y pulsamos `Enter`
 
 ![Primera interacción con el bot](./images/img1-step8.png)
@@ -189,7 +197,8 @@ Para ello, debemos tener en cuenta de que nuestro bot va a funcionar en modo
 predefinido dentro del mismo. Posteriormente le dotaremos de una interacción
 un poco más inteligente y también haremos que reconozca el lenguaje natural
 
-9. Vamos a reemplazar el código de nuestro fichero `server.js` por el siguiente:
+### Paso 9
+Vamos a reemplazar el código de nuestro fichero `server.js` por el siguiente:
 
 ```javascript
 var restify = require('restify');
@@ -243,7 +252,8 @@ Si observamos con detenimiento el código fuente, veremos claramente nuestra
 Ahí podemos apreciar una *cascada* de funciones anónimas que definen el diálogo
 en cada uno de las etapas de nuestra cascada.
 
-10. Nos vamos a la consola donde teníamos lanzada nuestra aplicación y interrumpimos 
+### Paso 10
+Nos vamos a la consola donde teníamos lanzada nuestra aplicación y interrumpimos 
 su ejecución pulsando dos veces `Ctrl+C`. Una vez que la ejecución se ha interrumpido
 volvemos a lanzar la aplicación con la misma instrucción que en el *paso 5*
 
@@ -255,12 +265,14 @@ C:\botlab> node server.js
 Si no hemos comentido ningún error volvermos a tener en ejecución la aplicación
 web que da soporte a nuestro nuevo bot.
 
-11. Relanzamos la conversación con el bot, reiniciando el emulador. Para ello 
+### Paso 11
+Relanzamos la conversación con el bot, reiniciando el emulador. Para ello 
 pulsamos en el botón de `Start new conversation`
 
 ![Reiniciar conversación](./images/img1-step11.png)
 
-12. Iniciamos la conversación con el nuevo bot, y respondemos a su *cascada* de 
+### Paso 12
+Iniciamos la conversación con el nuevo bot, y respondemos a su *cascada* de 
 preguntas. Al finalizar tendremos una conversación que sigue el flujo 
 predefinido dentro de nuestra aplicación web.
 
