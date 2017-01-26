@@ -11,8 +11,9 @@ During the drivers configuration you will be able to change the board name and t
 
 ![Intel Drivers](./images/inteldrivers.png "Intel&reg; Edison Board Configuration Tool")
 
-> If your event host has already set a password for you, ask before changing it :^^:
+> If your event host has already set a password for you, ask before changing it :smiley:
 
+You have a full step by step installation guide here: https://software.intel.com/en-us/installing-drivers-for-intel-edison-board-with-windows
 
 ## Connecting to your Edison Board
 
@@ -24,9 +25,11 @@ The red mark indicates the COM port you will need to setup in your ssh client, t
 
 ![putty](./images/serial.png)
 
-Once you have connected through serial with the COM port at 115200 bauds, you will get a screen like this (you may have to press the enter key to get a message):
+Once you have connected through serial with the COM port at 115200 bauds with putty, you will be asked for credentials (you may have to press the enter key to get a message):
 
 ![login](./images/edisonlogin.png)
+
+The default user is **root** and the password is the one you did set during the setup. (*Note: in our labs, we usually set IntelEdison as default password for all the boards*)
 
 ## WiFi Configuration
 
