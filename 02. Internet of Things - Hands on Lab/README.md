@@ -12,11 +12,11 @@ But first of all you will need to install your Intel Edison Board. You will need
 
 Once installed you will have something like this in your device manager:
 
-![ports](images/ports.png)
+![ports](./images/ports.png)
 
 The red mark indicates the COM port you will need to setup in your ssh client:
 
-![putty](images/serial.png)
+![putty](./images/serial.png)
 
 
 
