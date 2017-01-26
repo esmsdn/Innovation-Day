@@ -1,4 +1,5 @@
-# Node-red Lab
+# Innovation-Day: Internet of Things - Node-red Lab
+
 [Node-red](http://nodered.org) is an IoT platform that lets you build IoT Solutions with a graphical interface.
 For using node-red with an Intel Edison board you will have to login inside the board and run the following commands:
 
