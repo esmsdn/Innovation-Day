@@ -16,11 +16,11 @@ During the drivers configuration you will be able to change the board name and t
 
 ## Connecting to your Edison Board
 
-Once installed you will have something like this in your device manager:
+Once installed you will have something like this in your device manager, with several Serial Ports, the two Intel Edison ports are for debugging, but there is a *USB Serial Port(COMXX)*:
 
-![ports](./images/ports.png)
+![ports](./images/ports.png "Serial Ports")
 
-The red mark indicates the COM port you will need to setup in your ssh client:
+The red mark indicates the COM port you will need to setup in your ssh client, take a look on which port you have in your computer and use it as the port in the putty configuration:
 
 ![putty](./images/serial.png)
 
