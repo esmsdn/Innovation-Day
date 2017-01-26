@@ -1,12 +1,17 @@
 # Innovation-Day: Internet of Things - Install Edison
 
-But first of all you will need to install your Intel Edison Board. You will need:
+You will need:
 
 * A ssh client (like [putty](http://www.putty.org/))
-* The Intel Edison Drivers: https://software.intel.com/en-us/iot/hardware/edison/downloads
+* The Intel&reg; Edison Drivers: https://software.intel.com/en-us/iot/hardware/edison/downloads
 
 ## Drivers Configuration
 
+During the drivers configuration you will be able to change the board name and the password for the *root* user.
+
+![Intel Drivers](./images/inteldrivers.png "Intel&reg; Edison Board Configuration Tool")
+
+> If your event host has already set a password for you, ask before changing it :^^:
 
 
 ## Connecting to your Edison Board
