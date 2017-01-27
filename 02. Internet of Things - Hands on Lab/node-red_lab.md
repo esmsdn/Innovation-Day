@@ -143,12 +143,32 @@ Run the following command to get a connection string for your device:
 ```
 iothub-explorer login "[YOUR CONNECTION STRING]" create EdisonNodeRed --connection-string
 
-iothub-explorer create EdisonNodeRed --connectionstring
+iothub-explorer create EdisonNodeRed -c
 ```
 
 And you will get a screen like this:
 
 ![iothubcreatedevice](./images/iothubcreatedevice.png)
+
+From here we can create the connection string for the device with the primaryKey:
+
+```
+HostName=[hubname].azure-devices.net;DeviceId=EdisonNodeRed;SharedAccessKey=[new-device-key]
+```
+Connect a new function node to the Temperature output and write this function
+
+```
+msg.payload =JSON.stringify({
+    "sensor":"temp",
+    "value": msg.payload,
+    "timestamp": new Date()
+})
+return msg;
+```
+Then add a *azureiothub* node and set in the connection string the one you got before for the device. You will end with a diagram like this one:
+
+![FormatPayload](./images/formatpayload.png "Payload to Azure")
+
 
 ### 4. Deploy a visual Web App
 
