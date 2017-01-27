@@ -8,6 +8,7 @@
 * [GENERACIÓN DEL SERVIDOR WEB PARA EL BOT](#generacion-del-servidor-web-para-el-bot)
 * [INTERACCIÓN BÁSICA CON NUESTRO BOT](#interaccion-basica-con-nuestro-bot)
 * [INTERACCIÓN AVANZADA CON NUESTRO BOT](#interaccion-avanzada-con-nuestro-bot)
+* [DESPLIEGUE DE LA SOLUCIÓN EN AZURE](#despliegue-de-la-solucion-en-azure)
 
 ## INTRODUCCIÓN
 En este hands-on-lab vamos a desarrollar un "bot" utilizando **Bot Framework SDK**
@@ -277,3 +278,70 @@ preguntas. Al finalizar tendremos una conversación que sigue el flujo
 predefinido dentro de nuestra aplicación web.
 
 ![Reiniciar conversación](./images/img1-step12.png)
+
+## DESPLIEGUE DE LA SOLUCIÓN EN AZURE
+Ahora, vamos a intentar desplegar nuestro bot en Azure. Para ello precisamos de
+una subscripción activa de Azure y su correspondiente acceso con las autorizaciones
+pertinentes para poder crear recursos en dicha subscripción.
+
+### Paso 13
+Accedemos al [portal de administración de Azure](https://portal.azure.com) y
+creamos una nueva instancia de **Bot Service** siguiendo las siguientes 
+opciones del portal `New > Intelligence+analytics > Bot Service`
+
+![Creación de un Bot Service](./images/img1-step13.png)
+
+### Paso 14 
+
+Nos aparecerá un cuadro de diálogo donde deberemos introducir los datos básicos
+de identificación y ubicación de nuestro bot.
+
+![Datos básicos de Bot Service](./images/img1-step14.png)
+
+Una vez introducidos los datos, y si estos son correctos, pulsamos `Create`. Esto 
+nos creará una instancia de un Bot Service. Volvemos al inicio del portal y 
+localizamos dicha instancia y accedemos a su "blade" de administración.
+
+Dentro del blade tendremos la posibilidad de crear un **Microsoft App ID** y una 
+password para nuestro bot. Pulsamos en el boton correspondiente.
+
+![Creación de Microsoft App ID y Password](./images/img2-step14.png)
+
+_En caso de que ya tuvieramos creado el bot anteriormente dentro del portal 
+de Bot Framework, también podríamos pegar sus datos en los campos correspondientes
+del formulario_
+
+Al pulsar en el boton de creación nos aparecerá una pantalla adicional donde 
+tendremos el nombre de nuestro bot y su correspondiente **Microsoft App ID**
+
+![Microsoft App ID y Password](./images/img3-step14.png)
+
+Pulsamos en el boton para generar la password de nuestro bot. Nos aparecerá un 
+cuadro de diálogo con la password. 
+
+**Es importante tomar nota de dicha password**
+
+![Obtención password de nuetro bot](./images/img4-step14.png)
+
+Cerramos el cuadro de diálogo y también pulsa en el boton de finalización.
+
+![Finalización proceso de Microsoft App ID y Password](./images/img5-step14.png)
+
+Volvemos al *blade* de creación del bot con los datos y solo habremos de pegar 
+la password obtenida, seleccionar el lenguaje en que hemos programado nuestro bot (NodeJS) 
+y seleccionaremos la plantilla básica. Finalmente pulsamos sobre el botón de `Crear Bot`
+
+![Creación de bot](./images/img6-step14.png)
+
+![Progreso de creación de bot](./images/img7-step14.png)
+
+### Paso 15
+
+Al crear la instancia de **Bot Service** tendremos ahora un *blade* desde el 
+que tendremos las herramientas necesarias para desarrollar, integrar, configurar 
+y publicar nuestro bot.
+
+![Blade administración bot](./images/img1-step15.png)
+
+
+
