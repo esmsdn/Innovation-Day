@@ -169,12 +169,9 @@ And you will get a screen like this:
 
 ![iothubcreatedevice](./images/iothubcreatedevice.png)
 
-From here we can create the connection string for the device with the primaryKey:
+Copy the provided connection string, we will use it later.
 
-```
-HostName=[hubname].azure-devices.net;DeviceId=EdisonNodeRed;SharedAccessKey=[new-device-key]
-```
-Connect a new function node to the Temperature output and write this function, that creates a string with a JSON object that we will send through the wire to IoT Hub.
+Add a new function node and connect it to the Temperature output. Write this function inside. It creates a string with a JSON object that we will send through the wire to IoT Hub:
 
 ```
 msg.payload =JSON.stringify({
@@ -196,6 +193,27 @@ Deploy dashboard: https://github.com/ThingLabsIo/ThingLabs-IoT-Dashboard like in
 
 
 ### 5. Receive Cloud to Device messages
+Add a new function node and set this code, it converts an array of bytes into a string:
+
+```
+msg.payload = 
+ String.fromCharCode.apply(null, 
+      new Uint16Array(msg.payload));
+return msg;
+```
+
+Then connect the output of the *Azure IoT Hub* node you already have to the function and the function output to a *debug* node like this:
+
+![c2dmessages](./images/c2dmessages.png)
+
+Now from your command line you can send a message to your device:
+
+```
+iothub-explorer send EdisonNodeRed "Hello Node-RED"
+```
+You can see the messages sent to your device in the *debug* tab:
+
+![hello node-red](./images/hellonodered.png)
  
 ## More
 
