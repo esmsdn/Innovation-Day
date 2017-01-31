@@ -1,14 +1,15 @@
 # BOT FRAMEWORK + LUIS
-* [INTRODUCCIÓN](#introducción)
+* [INTRODUCCIÓN](#introducciÓn)
 * [ANTES DE EMPEZAR](#antes-de-empezar)
   * [REQUERIMIENTOS HARDWARE](#requerimientos-hardware)
   * [REQUERIMIENTOS SOFTWARE](#requerimientos-software)
   * [OTROS REQUERIMIENTOS](#otros-requerimientos)
-* [CREACIÓN DE LA SOLUCIÓN INICIAL EN AZURE](#creacion-de-la-solucion-inicial-en-azure)
-* [BOT DE INTERACCIÓN BÁSICA](#bot-de-interaccion-basica)
-* [GENERACIÓN DEL SERVIDOR WEB PARA EL BOT](#generacion-del-servidor-web-para-el-bot)
-* [INTERACCIÓN BÁSICA CON NUESTRO BOT](#interaccion-basica-con-nuestro-bot)
-* [INTERACCIÓN AVANZADA CON NUESTRO BOT](#interaccion-avanzada-con-nuestro-bot)
+* [CREACIÓN DE LA SOLUCIÓN INICIAL EN AZURE](#creaciÓn-de-la-soluciÓn-inicial-en-azure)
+* [BOT DE INTERACCIÓN BÁSICA](#bot-de-interacciÓn-basica)
+* [GENERACIÓN DEL SERVIDOR WEB PARA EL BOT](#generaciÓn-del-servidor-web-para-el-bot)
+* [INTERACCIÓN BÁSICA CON NUESTRO BOT](#interacciÓn-bÁsica-con-nuestro-bot)
+* [INTERACCIÓN AVANZADA CON NUESTRO BOT](#interacciÓn-avanzada-con-nuestro-bot)
+* [DESPLIEGUE DEL BOT EN AZURE](#despliegue-del-bot-en-azure)
 
 ## INTRODUCCIÓN
 En este hands-on-lab vamos a desarrollar un "bot" utilizando **Bot Framework SDK**
@@ -374,3 +375,10 @@ predefinido dentro de nuestra aplicación web.
 
 ![Reiniciar conversación](./images/img1-step12.png)
 
+Como vemos, tenemos ahora un bot, que sigue un flujo de conversación un poco más
+elaborado que el anterior.
+
+A continuación vamos a desplegar la solución en nuestro Bot Service para subirlo 
+a Azure. Las instrucciones se encuentran en el siguiente documento:
+
+[Segunda parte del laboratorio](./second-lab.md)
