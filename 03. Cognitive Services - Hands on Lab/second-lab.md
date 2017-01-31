@@ -61,38 +61,134 @@ consideramos oportuno**
 Si todo ha ido correctamente, estaremos conectados a nuestro sitio en Azure, 
 tal y como muestra la siguiente imagen.
 
- ![Conexión FTP exitosa](./images/lab2/img2-step2.png)
+![Conexión FTP exitosa](./images/lab2/img2-step2.png)
 
- Nos posicionaremos localmente en nuestra carpeta de proyecto, donde hemos 
- salvado nuestro fichero `index.js` con la interacción avanzada de la
-  [anterior parte del laboratorio ](./README.md##interacciÓn-avanzada-con-nuestro-bot)
+Nos posicionaremos localmente en nuestra carpeta de proyecto, donde hemos 
+salvado nuestro fichero `index.js` con la interacción avanzada de la
+[anterior parte del laboratorio ](./README.md##interacciÓn-avanzada-con-nuestro-bot)
 
 En la parte remota, nos posicionaremos en la correspondiente carpeta dentro del 
 servidor (`/site/wwwroot/messages`). Una vez posicionados correctamente tanto
 en la parte local como en el servidor, procederemos a sobreescribir el fichero 
 `index.js`del servidor con la copia local de nuestra carpeta de proyecto.
 
- ![Upload index.js](./images/lab2/img3-step2.png)
+![Upload index.js](./images/lab2/img3-step2.png)
 
- Si todo funciona correctamente, y el fichero es subido correctamente, esperaremos 
- 3-4 minutos para dar tiempo a que nuestra instancia de **Bot Service** reconozca
- los cambios y actualice nuestro Bot.
+Si todo funciona correctamente, y el fichero es subido correctamente, esperaremos 
+3-4 minutos para dar tiempo a que nuestra instancia de **Bot Service** reconozca
+los cambios y actualice nuestro Bot.
 
- Pasado ese tiempo, volveremos al portal de Azure y accederemos al *blade* generales
- de nuestro bot, el cual deberá estar ya mostrando los cambios realizados en 
- el fichero `index.js`. Incluso podremos probar nuestras modificaciones utiizando
- el emulador de bot embebido en el portal de Azure.
+Pasado ese tiempo, volveremos al portal de Azure y accederemos al *blade* generales
+de nuestro bot, el cual deberá estar ya mostrando los cambios realizados en 
+el fichero `index.js`. Incluso podremos probar nuestras modificaciones utiizando
+el emulador de bot embebido en el portal de Azure.
 
-  ![Bot actualizado](./images/lab2/img4-step2.png)
+![Bot actualizado](./images/lab2/img4-step2.png)
 
-  
+## UTILIZACIÓN DE LANGUAGE UNDERSTANDING INTELLIGENT SERVICE
 
+### Paso 3
 
+En el siguiente apartado vamos a empezar a utilizar el servicio de **Reconocimiento 
+del Lenguaje (LUIS)**. Para ello accederemos a [www.luis.ai](http://www.luis.ai) 
+y procederemos identificarnos como desarrollador. Si no tenemos cuenta deberemos
+registrarnos como desarrolladores en la misma página.
 
+![Acceso a LUIS](./images/lab2/img1-step3.png)
 
+Una vez identificados entraremos en la gestión de las aplicaciones que tengamos
+creadas en nuestra cuenta de LUIS.
 
+Procedemos a dar de alta una aplicación nueva utilizando el botón a tal efecto.
 
+![LUIS Applications](./images/lab2/img2-step3.png)
 
+Nos aparecerá un formulario donde deberemos introducir algunos datos básicos de
+nuestra aplicación. En este caso aparte de los datos básicos, hemos seleccionado 
+que nuestro escenario de aplicación de LUIS será un Bot, y que nuestra 
+aplicación funcionará para idioma Castellano.
 
+![LUIS Application Settings](./images/lab2/img3-step3.png)
+
+Pulsamos el botón de `Add App`y pasaremos a una página donde definiremos y
+gestionaremos el modelo que soportará nuestra aplicación.
+
+#### NOTA
+*En este laboratorio no entraremos en detalle sobre cómo definir y gestionar
+modelos complejos para reconocimiento de lenguaje natural. Si se tiene interés en profundizar más 
+se recomienda seguir el [Tutorial de LUIS](http://www.luis.ai/Help)
+
+### Paso 4 
+
+Vamos a empezar por añadir ciertas entidades predefinidas dentro de nuestra 
+aplicación. Las entidades predefinidas permiten a nuestro modelo reconocer
+cierto tipos de entidades sin necesidad de definirlas ni entrenar nuestro modelo
+para ello.
+
+Pulsamos en el botón `Pre-built Entities` y en el dialogo de selección elegimos
+las entidades `datetime`, `number` y `money`. Finalizamos pulsando el botón `Ok`
+
+![Entidades predefinidas](./images/lab2/img1-step4.png)
+
+### Paso 5
+
+Añadiremos también algunas entidades definidas por nosotros para su utilización 
+posterior. Pulsamos en el botón de `Entities` y añadimos una entidad denominada 
+`location`que nos servirá para entender ubicaciones y direcciones.
+
+![Entidades predefinidas](./images/lab2/img1-step5.png)
+
+Creamos además otra entidad denominada `stockid` que también utilizaremos más
+adelante.
+
+### Paso 6
+
+A continuación, definiremos cuales serán los `intents` que queremos que nuestro
+modelo de LUIS reconozca. Los `intents` no son más que las necesidades o las
+intenciones que nuestros interlocutores quieren expresar cuando interactúan 
+con nuestro modelo.
+
+En nuestro bot vamos a intentar reconocer cuando alguien quiere saber su
+localización actual, también reconoceremos cuando un usuario quiere saber la 
+cotización de una acción (*stock*) y le permitiremos preguntar por el día de la 
+semana que fue en una fecha concreta.
+
+Empezamos por definir el *intent* `getstockquote`. Pulsamos en el botón `Intents` 
+y rellenamos el formulario que nos aparece.
+
+![Definición de intents](./images/lab2/img1-step6.png)
+
+Nos aparecerá como primera declaración (*utterance**) para entrenar nuestro 
+modelo aquella que hemos introducido como ejemplo al definir el `intent`. 
+
+![Primera declaración de ejemplo](./images/lab2/img2-step6.png)
+
+Revisamos que sea correcta y que la intención asociada sea la que queremos y en
+caso afirmativo la enviamos a nuestro modelo mediante el botón `Submit`.
+
+Defimos de manera similar las intenciones `getlocation` y `getdatedetails`.
+
+### Paso 7 
+Ahora que tenemos nuestras entidades y las intenciones definidas, procederemos
+a entrenar el modelo para que vaya ajustando su nivel de reconocimiento.
+
+Para ello vamos introduciendo nuevas sentencias en la pestaña de `New utterances` 
+y procederemos a asociar los `intents`y las `entidades` correctas en caso de
+que el modelo no las reconozca adecuadamente
+
+![Entrenamiento del modelo 1](./images/lab2/img1-step7.png)
+
+![Entrenamiento del modelo 2](./images/lab2/img2-step7.png) 
+
+Una vez que hemos finalizado de introducir declaraciones en nuestro modelo,
+pulsaremos el botón `Train` para actualizar nuestro modelo de reconocimiento
+
+![Entrenamiento del modelo final](./images/lab2/img3-step7.png) 
+
+Tomará unos instantes el poder entrenar nuestro modelo. Una vez que esté 
+finalizado el proceso, pulsamos el botón de `Publish` y rellenamos los datos 
+que nos solicitan.
+
+![Publicación del modelo](./images/lab2/img4-step7.png) 
 
 
