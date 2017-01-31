@@ -4,11 +4,11 @@
   * [REQUERIMIENTOS HARDWARE](#requerimientos-hardware)
   * [REQUERIMIENTOS SOFTWARE](#requerimientos-software)
   * [OTROS REQUERIMIENTOS](#otros-requerimientos)
-* [PREPARACIÓN DEL PROYECTO](#preparacion-del-proyecto)
+* [CREACIÓN DE LA SOLUCIÓN INICIAL EN AZURE](#creacion-de-la-solucion-inicial-en-azure)
+* [BOT DE INTERACCIÓN BÁSICA](#bot-de-interaccion-basica)
 * [GENERACIÓN DEL SERVIDOR WEB PARA EL BOT](#generacion-del-servidor-web-para-el-bot)
 * [INTERACCIÓN BÁSICA CON NUESTRO BOT](#interaccion-basica-con-nuestro-bot)
 * [INTERACCIÓN AVANZADA CON NUESTRO BOT](#interaccion-avanzada-con-nuestro-bot)
-* [DESPLIEGUE DE LA SOLUCIÓN EN AZURE](#despliegue-de-la-solucion-en-azure)
 
 ## INTRODUCCIÓN
 En este hands-on-lab vamos a desarrollar un "bot" utilizando **Bot Framework SDK**
@@ -41,7 +41,84 @@ un servidor web visible en internet
 Para más información visitar la siguiente 
 [página](https://www.microsoft.com/cognitive-services/en-us/)  
 
-## PREPARACIÓN DEL PROYECTO
+## CREACIÓN DE LA SOLUCIÓN INICIAL EN AZURE
+Ahora, vamos a intentar desplegar nuestro bot en Azure. Para ello precisamos de
+una subscripción activa de Azure y su correspondiente acceso con las autorizaciones
+pertinentes para poder crear recursos en dicha subscripción.
+
+### Paso 1
+Accedemos al [portal de administración de Azure](https://portal.azure.com) y
+creamos una nueva instancia de **Bot Service** siguiendo las siguientes 
+opciones del portal `New > Intelligence+analytics > Bot Service`
+
+![Creación de un Bot Service](./images/img1-step13.png)
+
+### Paso 2 
+
+Nos aparecerá un cuadro de diálogo donde deberemos introducir los datos básicos
+de identificación y ubicación de nuestro bot.
+
+![Datos básicos de Bot Service](./images/img1-step14.png)
+
+Una vez introducidos los datos, y si estos son correctos, pulsamos `Create`. Esto 
+nos creará una instancia de un Bot Service. Volvemos al inicio del portal y 
+localizamos dicha instancia y accedemos a su "blade" de administración.
+
+Dentro del blade tendremos la posibilidad de crear un **Microsoft App ID** y una 
+password para nuestro bot. Pulsamos en el boton correspondiente.
+
+![Creación de Microsoft App ID y Password](./images/img2-step14.png)
+
+_En caso de que ya tuvieramos creado el bot anteriormente dentro del portal 
+de Bot Framework, también podríamos pegar sus datos en los campos correspondientes
+del formulario_
+
+Al pulsar en el boton de creación nos aparecerá una pantalla adicional donde 
+tendremos el nombre de nuestro bot y su correspondiente **Microsoft App ID**
+
+![Microsoft App ID y Password](./images/img3-step14.png)
+
+Pulsamos en el boton para generar la password de nuestro bot. Nos aparecerá un 
+cuadro de diálogo con la password. 
+
+**Es importante tomar nota de dicha password**
+
+![Obtención password de nuetro bot](./images/img4-step14.png)
+
+Cerramos el cuadro de diálogo y también pulsa en el boton de finalización.
+
+![Finalización proceso de Microsoft App ID y Password](./images/img5-step14.png)
+
+Volvemos al *blade* de creación del bot con los datos y solo habremos de pegar 
+la password obtenida, seleccionar el lenguaje en que hemos programado nuestro bot (NodeJS) 
+y seleccionaremos la plantilla básica. Finalmente pulsamos sobre el botón de `Crear Bot`
+
+![Creación de bot](./images/img6-step14.png)
+
+![Progreso de creación de bot](./images/img7-step14.png)
+
+### Paso 3
+
+Al crear la instancia de **Bot Service** tendremos ahora un *blade* desde el 
+que tendremos las herramientas necesarias para desarrollar, integrar, configurar 
+y publicar nuestro bot.
+
+![Blade administración bot](./images/img1-step15.png)
+
+### Paso 4
+
+Ahora vamos a descargarnos una versión inicial del código de nuestro bot para 
+empezar a trabajar sobre él. Para ello, en la pantalla anterior, nos vamos a la 
+pestaña de **Settings** la cual nos presentará la siguiente pantalla
+
+![Pantalla de ajustes del Bot Service](./images/img1-step16.png)
+
+
+Pulsamos sobre el desplegable de **Continuous Integration** y nos descargamos el 
+archivo comprimido con la solución inicial de nuestro bot (**Opción 1**) 
+guardándolo en algún directorio temporal.
+
+## BOT DE INTERACCIÓN BÁSICA
 
 ### Paso 1
 Primero creamos un proyecto de NodeJS donde albergaremos nuestro Bot. 
@@ -50,25 +127,20 @@ Para ello nos posicionamos en un directorio de trabajo y creamos un proyecto
  ```powershell
     C:\> mkdir botlab
     C:\> cd botlab
-    C:\botlab> npm init
-    <<rellenar las preguntas>>
-    ...
 ```
+
 ![Preparación del proyecto](./images/img1-step1.png)
 
-Ahora en este punto disponemos de un proyecto vacío con soporte para NodeJS.
-A partir de aquí tendremos que empezar a cargar las dependencias necesarias para
- que el proyecto funcione con el Bot Framework y LUIS.
+En dicho directorio descomprimiremos el fichero que nos hemos descargado en el 
+apartado anterior con el código inicial de nuestro bot.
 
 ### Paso 2
-En la misma consola y posicionados dentro del directorio de proyecto,
-cargaremos las dependencias del proyecto. Para ello utilizaremos las 
-siguientes instrucciones:
+Ahora, restauramos las dependencias de nuestro proyecto NodeJS con las siguientes 
+instrucciones:
 ```powershell
-C:\> npm install --save botbuilder
-…
-C:\> npm install --save restify
-…
+C:\botlab\> cd messages
+C:\botlab\messages\> npm install
+...
 ```
 
 ![Resolución de dependencias](./images/img1-step2.png)
@@ -81,14 +153,13 @@ Ahora deberemos empezar a incluir el código básico de nuestra aplicación.
 Abrimos Visual Studio Code dentro del directorio de la solución. 
 Para ello, desde la línea de comandos, introducimos la siguiente instrucción:
 ```powershell
-C:\> code . 
+C:\botlab\messages\> code . 
 ```
 Esto nos abrirá Visual Studio Code y abrirá la carpeta del proyceto. También
 podemos abrir Visual Studio Code desde el menú de inicio de Windows y una vez
 dentro del editor, utilizar la opción `File>Open Folder...` 
 
-Creamos el fichero inicial de nuestro proyecto (`server.js`). Esto lo 
-podemos realizar desde dentro del editor, utilizando la opción `File>New File...`
+Abrimos el fichero inicial de nuestro proyecto (`index.js`). 
 
 ![Creación fichero raíz del proyecto](./images/img1-step3.png)
 
@@ -97,30 +168,41 @@ podemos realizar desde dentro del editor, utilizando la opción `File>New File..
 ### Paso 4
 Llegados a este punto, primeramente, hemos de crear una aplicación de
 API REST que responda a las interacciones con los usuarios a través de los
-diferentes canales. Para ello, dentro del fichero `server.js` incluiremos 
+diferentes canales. Para ello, dentro del fichero `index.js` incluiremos 
 el siguiente código:
 
 ```javascript 
-var restify = require('restify');
-var builder = require('botbuilder');
+"use strict";
+var builder = require("botbuilder");
+var botbuilder_azure = require("botbuilder-azure");
+
+var useEmulator = (process.env.NODE_ENV == 'development');
 
 //=========================================================
 // Bot Setup
 //=========================================================
 
-// Setup Restify Server
-var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
-  
 // Create chat bot
-var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
+var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
+    appId: process.env['MicrosoftAppId'],
+    appPassword: process.env['MicrosoftAppPassword'],
+    stateEndpoint: process.env['BotStateEndpoint'],
+    openIdMetadata: process.env['BotOpenIdMetadata']
 });
+
 var bot = new builder.UniversalBot(connector);
-server.post('/api/messages', connector.listen());
+// Setup Restify Server if needed
+if (useEmulator) {
+    var restify = require('restify');
+    var server = restify.createServer();
+    server.listen(3978, function () {
+        console.log('test bot endpoint at http://localhost:3978/api/messages');
+    });
+    server.post('/api/messages', connector.listen());
+} else {
+    module.exports = { default: connector.listen() }
+}
+
 
 //=========================================================
 // Bots Dialogs
@@ -129,6 +211,7 @@ server.post('/api/messages', connector.listen());
 bot.dialog('/', function (session) {
     session.send("Hello World");
 });
+
 ```
 
 Ahora disponemos de una aplicación REST API básica desarrollada con NodeJS
@@ -139,7 +222,7 @@ deberemos arrancar la aplicación web.
 Dentro de la consola de comandos posicionada dentro del directorio de la
 solución tecleamos la siguiente instrucción:
 ```powershell
-C:\botlab> node server.js
+C:\botlab\messages> node index.js
 ```
 
 ![Ejecución local de la aplicación web](./images/img1-step5.png)
@@ -202,16 +285,22 @@ un poco más inteligente y también haremos que reconozca el lenguaje natural
 Vamos a reemplazar el código de nuestro fichero `server.js` por el siguiente:
 
 ```javascript
-var restify = require('restify');
-var builder = require('botbuilder');
+"use strict";
+var builder = require("botbuilder");
+var botbuilder_azure = require("botbuilder-azure");
+
+var useEmulator = (process.env.NODE_ENV == 'development');
 
 //=========================================================
 // Bot Setup
 //=========================================================
 
-var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD    
+// Create chat bot
+var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
+    appId: process.env['MicrosoftAppId'],
+    appPassword: process.env['MicrosoftAppPassword'],
+    stateEndpoint: process.env['BotStateEndpoint'],
+    openIdMetadata: process.env['BotOpenIdMetadata']
 });
 
 var bot = new builder.UniversalBot(connector, [
@@ -238,13 +327,18 @@ var bot = new builder.UniversalBot(connector, [
 
 ]);
 
-// Setup Restify Server
-var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
-  
-server.post('/api/messages', connector.listen());
+// Setup Restify Server if needed
+if (useEmulator) {
+    var restify = require('restify');
+    var server = restify.createServer();
+    server.listen(3978, function () {
+        console.log('test bot endpoint at http://localhost:3978/api/messages');
+    });
+    server.post('/api/messages', connector.listen());
+} else {
+    module.exports = { default: connector.listen() }
+}
+
 ```
 
 Si observamos con detenimiento el código fuente, veremos claramente nuestra 
@@ -259,8 +353,9 @@ su ejecución pulsando dos veces `Ctrl+C`. Una vez que la ejecución se ha inter
 volvemos a lanzar la aplicación con la misma instrucción que en el *paso 5*
 
 ```powershell
-C:\botlab> node server.js
+C:\botlab\messages> node index.js
 ```
+
 ![Interrupción y relanzado del bot](./images/img1-step10.png)
 
 Si no hemos comentido ningún error volvermos a tener en ejecución la aplicación
@@ -278,70 +373,4 @@ preguntas. Al finalizar tendremos una conversación que sigue el flujo
 predefinido dentro de nuestra aplicación web.
 
 ![Reiniciar conversación](./images/img1-step12.png)
-
-## DESPLIEGUE DE LA SOLUCIÓN EN AZURE
-Ahora, vamos a intentar desplegar nuestro bot en Azure. Para ello precisamos de
-una subscripción activa de Azure y su correspondiente acceso con las autorizaciones
-pertinentes para poder crear recursos en dicha subscripción.
-
-### Paso 13
-Accedemos al [portal de administración de Azure](https://portal.azure.com) y
-creamos una nueva instancia de **Bot Service** siguiendo las siguientes 
-opciones del portal `New > Intelligence+analytics > Bot Service`
-
-![Creación de un Bot Service](./images/img1-step13.png)
-
-### Paso 14 
-
-Nos aparecerá un cuadro de diálogo donde deberemos introducir los datos básicos
-de identificación y ubicación de nuestro bot.
-
-![Datos básicos de Bot Service](./images/img1-step14.png)
-
-Una vez introducidos los datos, y si estos son correctos, pulsamos `Create`. Esto 
-nos creará una instancia de un Bot Service. Volvemos al inicio del portal y 
-localizamos dicha instancia y accedemos a su "blade" de administración.
-
-Dentro del blade tendremos la posibilidad de crear un **Microsoft App ID** y una 
-password para nuestro bot. Pulsamos en el boton correspondiente.
-
-![Creación de Microsoft App ID y Password](./images/img2-step14.png)
-
-_En caso de que ya tuvieramos creado el bot anteriormente dentro del portal 
-de Bot Framework, también podríamos pegar sus datos en los campos correspondientes
-del formulario_
-
-Al pulsar en el boton de creación nos aparecerá una pantalla adicional donde 
-tendremos el nombre de nuestro bot y su correspondiente **Microsoft App ID**
-
-![Microsoft App ID y Password](./images/img3-step14.png)
-
-Pulsamos en el boton para generar la password de nuestro bot. Nos aparecerá un 
-cuadro de diálogo con la password. 
-
-**Es importante tomar nota de dicha password**
-
-![Obtención password de nuetro bot](./images/img4-step14.png)
-
-Cerramos el cuadro de diálogo y también pulsa en el boton de finalización.
-
-![Finalización proceso de Microsoft App ID y Password](./images/img5-step14.png)
-
-Volvemos al *blade* de creación del bot con los datos y solo habremos de pegar 
-la password obtenida, seleccionar el lenguaje en que hemos programado nuestro bot (NodeJS) 
-y seleccionaremos la plantilla básica. Finalmente pulsamos sobre el botón de `Crear Bot`
-
-![Creación de bot](./images/img6-step14.png)
-
-![Progreso de creación de bot](./images/img7-step14.png)
-
-### Paso 15
-
-Al crear la instancia de **Bot Service** tendremos ahora un *blade* desde el 
-que tendremos las herramientas necesarias para desarrollar, integrar, configurar 
-y publicar nuestro bot.
-
-![Blade administración bot](./images/img1-step15.png)
-
-
 
