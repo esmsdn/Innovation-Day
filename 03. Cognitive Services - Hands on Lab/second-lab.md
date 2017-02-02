@@ -1,7 +1,9 @@
 # BOT FRAMEWORK + LUIS (SEGUNDA PARTE)
 * [INTRODUCCIÓN](#introducciÓn)
 * [OBTENCIÓN CREDENCIALES DE DESPLIEGUE](#obtenciÓn-credenciales-de-despliegue)
-* [DESPLIEGUE FTP](#despliegue-ft)
+* [DESPLIEGUE FTP](#despliegue-ftp)
+* [CREACIÓN DEL MODELO CON LUIS](#creaciÓn-del-modelo-con-luis)
+* [INTEGRACIÓN DE LUIS CON EL BOT](#integraciÓn-de-luis-con-el-bot)
 
 ## INTRODUCCIÓN
 En este segunda parte de nuestro laboratorio continuaremos con el despligue de 
@@ -85,7 +87,7 @@ el emulador de bot embebido en el portal de Azure.
 
 ![Bot actualizado](./images/lab2/img4-step2.png)
 
-## UTILIZACIÓN DE LANGUAGE UNDERSTANDING INTELLIGENT SERVICE
+## CREACIÓN DEL MODELO CON LUIS
 
 ### Paso 3
 
@@ -115,8 +117,9 @@ gestionaremos el modelo que soportará nuestra aplicación.
 
 #### NOTA
 *En este laboratorio no entraremos en detalle sobre cómo definir y gestionar
-modelos complejos para reconocimiento de lenguaje natural. Si se tiene interés en profundizar más 
-se recomienda seguir el [Tutorial de LUIS](http://www.luis.ai/Help)
+modelos complejos para reconocimiento de lenguaje natural. Si se tiene interés 
+en profundizar más se recomienda seguir el
+[Tutorial de LUIS](http://www.luis.ai/Help)
 
 ### Paso 4 
 
@@ -134,12 +137,9 @@ las entidades `datetime`, `number` y `money`. Finalizamos pulsando el botón `Ok
 
 Añadiremos también algunas entidades definidas por nosotros para su utilización 
 posterior. Pulsamos en el botón de `Entities` y añadimos una entidad denominada 
-`location`que nos servirá para entender ubicaciones y direcciones.
+`stockid`que n os servirá para entender *tickers* de bolsa.
 
-![Entidades predefinidas](./images/lab2/img1-step5.png)
-
-Creamos además otra entidad denominada `stockid` que también utilizaremos más
-adelante.
+![Definición de entidades](./images/lab2/img1-step5.png)
 
 ### Paso 6
 
@@ -166,7 +166,7 @@ modelo aquella que hemos introducido como ejemplo al definir el `intent`.
 Revisamos que sea correcta y que la intención asociada sea la que queremos y en
 caso afirmativo la enviamos a nuestro modelo mediante el botón `Submit`.
 
-Defimos de manera similar las intenciones `getlocation` y `getdatedetails`.
+Defimos de manera similarel *intent* `gethelp`.
 
 ### Paso 7 
 Ahora que tenemos nuestras entidades y las intenciones definidas, procederemos
@@ -191,4 +191,202 @@ que nos solicitan.
 
 ![Publicación del modelo](./images/lab2/img4-step7.png) 
 
+## INTEGRACIÓN DE LUIS CON EL BOT
+
+En este apartado modificaremos el bot que tenemos desarrollado para que integre
+con el modelo de reconocimiento del lenguaje que acabamos de definir en LUIS.
+
+### Paso 8
+
+Primero añadiremos un par de dependencias NPM a nuestro proyecto. Para ello
+nos posicionamos dentro del directorio donde está nuestro fichero `index.js`
+y abrimos una consola de comandos. Dentro de dicha consola tecleamos las siguientes
+instrucciones:
+
+```
+C:\botlab\messages\> npm install node-bing-api --save
+C:\botlab\messages\> npm install yahoo-finance --save 
+
+```  
+Estas dependencias permitirán a nuestro bot pedir información financiera sobre una 
+compañía mediante los servicios de **Yahoo Finance** y su noticias asociadas mediante el 
+API de **Bing Search**.
+
+#### NOTA 
+Para poder utilizar los servicios de búsqueda de noticias de Bing, es necesario
+disponer de un *API Key* para el servicio. Dicho servicio es parte de los 
+*Cognitive Services* por lo que podemos solicitar dicha clave en el 
+[Portal de desarrolladores de Cognitive Services](http://dev.cognitive.microsoft.com)
+
+Volvemos a nuestro ventana de **Visual Studio Code** y en el fichero `index.js` 
+sustituimos el código existente por el siguiente:
+
+```javascript
+"use strict";
+var builder = require("botbuilder");
+var botbuilder_azure = require("botbuilder-azure");
+const util = require('util');
+var bing = require('node-bing-api')({ accKey: "5d6c5bed99364dd28fb726b38201b69a" });
+var yahooFinance = require('yahoo-finance');
+
+var useEmulator = (process.env.NODE_ENV == 'development');
+
+// Create chat bot
+var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
+    appId: process.env['MicrosoftAppId'],
+    appPassword: process.env['MicrosoftAppPassword'],
+    stateEndpoint: process.env['BotStateEndpoint'],
+    openIdMetadata: process.env['BotOpenIdMetadata']
+});
+
+var bot = new builder.UniversalBot(connector, {
+    localizerSettings: { defaultLocale: "es" }
+});
+
+var model = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/e912cce5-39d4-4a68-9240-6ee4213d44bc?subscription-key=d41eb70bf2db42c6869a3b0fd6e6ffad";
+var recognizer = new builder.LuisRecognizer(model);
+var intents = new builder.IntentDialog({ recognizers: [recognizer] });
+
+// Now register begin conversation dialog
+intents.onBegin(function (session, args) {
+    session.send("Hola. ¿Cómo puedo ayudarte?");
+});
+
+// Register default dialog for non-recognized utterances
+intents.onDefault(builder.DialogAction.send("Lo siento, eso no lo he entendido. ¿Me lo puedes explicar mejor?"));
+
+// Now define intentss based on intents and entities
+// Intent: getlocation
+intents.matches('getstockquote', [
+   // First step of the dialog
+    function (session, args, next) {
+        var stockIdEntity = builder.EntityRecognizer.findEntity(args.entities, 'stockid');
+        var stockId = session.dialogData.stockId = (stockIdEntity) ? stockIdEntity.entity : null;
+        console.log('Intent "getstockquote" stock:' + stockId);
+        next();
+        // Let's get the stock info from Yahoo! Finance
+        yahooFinance.snapshot({
+            symbol: session.dialogData.stockId
+        }).then(function (data) {
+            console.log(data);
+            var fmt = new Intl.NumberFormat();
+            var stockQuote = session.dialogData.stockQuote = data;
+            session.send("Stock %s [%s] Precio %s (%s) Volumen %s",
+                stockQuote.name,
+                stockQuote.symbol,
+                fmt.format(stockQuote.lastTradePriceOnly, { style: 'currency', minimumFractionDigits: 2 }),
+                fmt.format(stockQuote.change, { style: 'percent', minimumFractionDigits: 2 }),
+                fmt.format(stockQuote.volume, { style: 'decimal', minimumFractionDigits: 2 }));
+            builder.Prompts.confirm(session,
+                util.format("¿Quieres que te muestre las últimas noticias sobre '%s'?", stockQuote.name),
+                { localizationNamespace: 'es' });
+        },function (reason) {
+                session.send("Lo siento pero no he sido capaz de encontrar información sobre '%s'",
+                    session.dialogData.stockId);
+        })
+    },
+    // Second step of the dialog
+    function (session, results, next) {
+        if (results.response) {
+           // Let's get the news about the company from Bing
+            bing.news(session.dialogData.stockQuote.name, 
+                {top: 3},
+                function (error, res, body) {
+                if (body.value.length > 0) {
+                    session.send("Esto es lo que encontré sobre '%s'\n", session.dialogData.stockQuote.name);
+                    body.value.forEach(function (element) {
+                        var card = new builder.HeroCard(session)
+                            .title(element.name)
+                            .text(element.description)
+                            .buttons([builder.CardAction.openUrl(session, element.url, "Navegar")]);
+                        var msg = new builder.Message(session).addAttachment(card);
+                        session.send(msg);
+                    });
+                }
+                else {
+                    session.send("Pues parece que no hay muchas noticias hoy sobre ello");
+                }
+            });
+        }
+    }
+]);
+// Intent: gethelp
+intents.matches('gethelp', function (session, args) {
+    session.send("Soy un bot bastante listo y sé mucho sobre cotizaciones de bolsa. Ponme a prueba")
+});
+
+bot.dialog('/', intents);
+
+// Setup Restify Server if needed
+if (useEmulator) {
+   var restify = require('restify');
+   var server = restify.createServer();
+   server.listen(3978, function () {
+        console.log('test bot endpoint at http://localhost:3978/api/messages');
+   });
+   server.post('/api/messages', connector.listen());
+} else {
+   module.exports = { default: connector.listen() };
+}
+```
+
+Si se observa el código adjunto, nuestro bot define dos dialogos basados en 
+`intents`. Uno de ellos gestiona el dialogo para obtener la cotización y las 
+noticias asociadas de un *ticker* y el segundo es el diálogo cuando el usuario
+solicita ayuda al bot.
+
+Comprobamos que nuestro bot funciona correctamente con el nuevo código,
+utilizando el emulardor tal y como se hizo en el
+[Paso 6 del laboratorio anterior](./README.md#paso-6)
+
+![Depuración local](./images/lab2/img1-step8.png)
+
+![Depuración local cont.](./images/lab2/img2-step8.png)
+
+Como se puede ver, el bot es capaz de entender peticiones realizadas en 
+lenguaje natural, acceder a servicios REST para obtención de la información
+solicitada, y además presentarla en *Cards* de una manera rica (*Las HeroCard 
+pueden no estar soportadas en todos los canales posibles a los que podeos conectar 
+nuestro bot, como por ejemplo SMS*)
+
+Vamos a desplegar la nueva lógica de nuestro bot en la instancia de *Bot Service* 
+que tenemos en Azure.
+
+## DESPLIEGUE EN AZURE 
+
+### Paso 9
+
+Ahora, utilizando FTP procedemos a subir los ficheros `package.json` e `index.js`
+dentro del correspondiente directorio de nuestra instancia tal y como realizamos
+en el [Paso 2 de este laboratorio](#Paso-2)
+
+### Paso 10
+
+Una vez subido el código, debemos forzar a que la aplicación restaure sus 
+dependencias NPM en Azure. Para ello abrimos el *blade* de configuración avanzada
+de nuestro bot y seleccionamos la opción `Console`
+
+![Apertura de consola en  bot](./images/lab2/img1-step10.png)
+
+Dentro de la consola, nos posicionamos en el directorio de la aplicación del
+bot en el que está el fichero `package.json`y tecleamos:
+
+```powershell
+> npm install
+```
+
+Esto restaurará las dependencias nuevas para poder acceder a **Yahoo! Finance API** y 
+**Bing Search API**
+
+Una vez finalizada la restauración de dependencias, damos unos minutos a 
+nuestro bot para que refresque la instancia con los cambios y ya tendremos
+disponible la nueva lógica en nuestra instancia en Azure.
+
+![Nueva lógica disponible](./images/lab2/img2-step10.png) 
+
+Ahora ya solo resta, publicar nuestro bot para poderlo conectar en diversos
+canales y que la gente lo pueda acceder.
+
+Eso lo haremos en la [tercera parte de nuestro laboratorio](./third-lab.md)
+ 
 
