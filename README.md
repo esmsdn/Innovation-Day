@@ -2,6 +2,7 @@
 ISVs Innovation Day decks and Hands-on-Labs instructions
 
 Agenda
+
 | Time (min) | Activity |
 | ---        | ---      |
 | 45         | [Introduction to Microsoft Azure new services](./01. Introduction decks/01. Intro session.pptx) |
