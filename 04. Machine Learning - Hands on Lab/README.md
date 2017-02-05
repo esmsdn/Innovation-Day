@@ -1,26 +1,8 @@
-# Azure Machine Learning Hands on Labs
+# Innovation-Day: Machine Learning - Hands on Lab
 
 This content is designed for audience without any prior Machine learning knowledge. It starts from very basics and goes to advanced topics. We will try to keep this content live and include more and more advanced lab sessions with real life scenarious. Thanks for your support and feedback to make this content better. 
 
-### **Suggested timeline for Azure Machine Learning Hands On Lab (HOL)**
-
-| Time (min) | Activity |
-| ---        | ---      |
-| 50         | [Introduction to Machine Learning](./000-into-machine-learning.pptx) |
-| 20         | Lab1 - [Setting up development environment](./001-lab-setup.md) |
-| 45         | Lab2 - [Introduction to R, Python & Data Synth](./002-lab-data-synth.md) |
-| 45         | Lab3 - [AzureML Experiments & Data Interaction](./003-lab-data-interact.md) |
-| 60         | Lab4 - [Develop and Consume AzureML Models](./004-lab-azureml-experiment.md) |
-| 45         | Lab5 - [Custom Scripts (R & Python) in AML](./005-lab-custom-script-r-python.md) |
-| 60         | Lab6 - [Evaluate model performance in AML](./006-lab-model-evaluation.md) |
-| 60         | Lab7 - [Azure ML Batch Score, Retrain, Production and Automatization](./007-lab-production-ops.md) |
-| 45         | Lab8 - [Recommendation System](./008-lab-recommendation-system.md) |
-| 45         | Lab9 - [Monetizing Azure ML Solution](./009-lab-monetization.md) |
-| 90         | Lab10 - [Case Study: Optical character recognition](./010-lab-cs-ocr.md) |
-
 ### **Detailed contents of the HOL**
-
- - [Introduction to Machine Learning](./000-into-machine-learning.pptx)
     
 1. [Setting up development environment](./001-lab-setup.md)  
     * Overview
