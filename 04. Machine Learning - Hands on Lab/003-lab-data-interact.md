@@ -1,3 +1,6 @@
+[Previous step: Introduction to R, Python & Data Synth](./002-lab-data-synth.md)
+
+
 # 3. AzureML Experiments & Data Interaction
 ## 3.1. Overview
 In this lab, we will use AML input modules to read dataset from various sources that we created in the previous lab. We will explore the ways to connect different data sources, retrieve data, get basic statistics and basic data visualization techniques. This will be a basis for the next sessions where we will be developing ML solutions for the problems.  
@@ -167,3 +170,6 @@ Finally, we will explore the steps to access data retrieved using an HTTP web re
 2. Set “Reader/Import Data” module’s properties. You just need the endpoint URL to be requested and the format in which data results would be retrieved. Use the checkboxes below to select whether your data has headers or not and the possibility to use cached results if the data retrieved won't be changing too much, so the request hasn't need to be done each time you run your experiment.
 
     ![](./imgs/3.3.i026.png)  
+
+
+[Next step: Develop and Consume AzureML Models](./004-lab-azureml-experiment.md)

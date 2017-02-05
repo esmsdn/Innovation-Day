@@ -1,3 +1,6 @@
+[Previous step: Develop and Consume AzureML Models](./004-lab-azureml-experiment.md)
+
+
 # 5. Custom Scripts (R & Python) in AML
 ## 5.1. Overview
 In this lab we will convert the R & Python codes that we executed on our local machines in the first lab session of this hands-on lab series. Idea is to show the capability of running native R & Python code in Azure ML experiment. Explore the customization features of Azure ML experiments. This knowledge can be used to integrate local or third party R & Python scripts, libraries, workspaces etc. into Azure ML experiment.  
@@ -154,3 +157,6 @@ def azureml_main(dataframe1 = None, dataframe2 = None):
 
 16. “RUN” the experiment and visualize the output through the first output port. Version of the Azure ML python environment is _2.7.7_  
 ![](./imgs/5.2.i015.png)  
+
+
+[Next step: Evaluate model performance in AML](./006-lab-model-evaluation.md)

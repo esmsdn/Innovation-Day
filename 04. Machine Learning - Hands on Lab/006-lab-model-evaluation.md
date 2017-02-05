@@ -1,3 +1,6 @@
+[Previous step: Custom Scripts (R & Python) in AML](./005-lab-custom-script-r-python.md)
+
+
 # 6. Evaluate model performance in AML
 ## 6.1. Overview
 In this lab we will explore the methods used in AML to evaluate the performance of models. We will answer the questions like “How precise is your model?”, “Which model is better?”, “Which features we should use?”  
@@ -309,3 +312,12 @@ From the above matrix it is clear that “z3” doesn’t have big impact as it 
 ![](./imgs/6.2.i049.png)  
 
     You can see that “z3” has 0 effect on the result and “z2” doesn’t have so much impact while “x” and “z1” have higher impacts.  
+
+
+[Bonus track: Azure ML Batch Score, Retrain, Production and Automatization](./007-lab-production-ops.md)
+
+[Bonus track: Recommendation System](./008-lab-recommendation-system.md)
+
+[Bonus track: Monetizing Azure ML Solution](./009-lab-monetization.md)
+
+[Case Study: Optical character recognition](./010-lab-cs-ocr.md)

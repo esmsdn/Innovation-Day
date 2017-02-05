@@ -1,3 +1,6 @@
+[Previous step: Setting up development environment](./001-lab-setup.md) 
+
+
 # 2. Introduction to R, Python & Data Synth
 ## 2.1. Overview
 In this lab, we will use R, Python IDE, Microsoft Excel, Azure SQL Database, Azure Storage to create and store synthetic dataset that we will use in our next experiments. First we will see how to generate synthetic dataset on a local machine, then we will explore the possibility to host the generated data on an Azure SQL Server, Azure Blob Storage (similar to Azure Table Storage) services that can be used as data input source in AML. In the following lab, we will use Azure ML studio to consume these data in our AML experiment developments.
@@ -176,4 +179,3 @@ AML Studio has pre-loaded ready to use datasets. You can access the details of t
 
 
 [Next step: AzureML Experiments & Data Interaction](./003-lab-data-interact.md)
-[Next step: AzureML Experiments & Data Interaction](../003-lab-data-interact.md)

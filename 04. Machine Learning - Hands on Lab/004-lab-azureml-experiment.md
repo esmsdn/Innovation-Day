@@ -1,3 +1,6 @@
+[Previous step: AzureML Experiments & Data Interaction](./003-lab-data-interact.md)
+
+
 # 4. Develop and Consume AzureML Models
 ## 4.1. Overview
 In this lab, stages to create an Azure ML experiment to train a model and integrate it into an application is discussed. First section shows the way to read the synthetized dataset that we created in previous labs and train a linear regression model with the read dataset. Then the trained model is published as a web service which is integrated into a sample console application. Accessing through the endpoints of the web service, sample application sends input parameters and retrieves predicted correspondences as an output value in JSON format.  
@@ -203,3 +206,6 @@ In the previous example, we used integer data types as input value. What about f
 ![](./imgs/4.2.i047.png)  
 
 6. With all these modification, “RUN” the experiment and then publish it again. Now you can use it with floating point input values.  
+
+
+[Next step: Custom Scripts (R & Python) in AML](./005-lab-custom-script-r-python.md)
