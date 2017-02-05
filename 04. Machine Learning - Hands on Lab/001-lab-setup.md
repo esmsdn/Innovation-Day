@@ -92,3 +92,5 @@ Once the installation completed you can start developing Python code through Spy
 
 ## 1.6. Install Microsoft Excel
 In the upcoming lab sessions, for generating synthetic data, we will be using Microsoft Excel application because of its simplicity and quick visualization capabilities. In case you want to play on the synthetic data, modify it or develop your own algorithms to produce raw data it is higly recommended to install Microsoft Excel or similar tool. You can download and install one month free trial version of the product from [https://products.office.com/en-us/try](https://products.office.com/en-us/try)
+
+[Next step: Introduction to R, Python & Data Synth](./002-lab-data-synth.md)

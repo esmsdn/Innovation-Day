@@ -173,3 +173,7 @@ To generate synthetic data in R, we will use the R studio installed on the local
 
 ## 2.3. Other Dataset sources
 AML Studio has pre-loaded ready to use datasets. You can access the details of these datasets and their description from the following [link](https://azure.microsoft.com/en-us/documentation/articles/machine-learning-use-sample-datasets/). Some of these datasets are retrieved from [University of California Irvine Machine Learning repository](http://archive.ics.uci.edu/ml/index.html) (UCI). In the future AML experiments, you may want to use existing CSV files on Internet as a datasource of your ML model. i.e. Forest Fires Dataset referred under UCI has the access link http://www.dsi.uminho.pt/~pcortez/forestfires/forestfires.csv. In AML you can directly access this data without copying it into SQL Server or Storage service etc. Having known the existence of online datasets mentioned it is a good idea to browse available set from the [link](https://azure.microsoft.com/en-us/documentation/articles/machine-learning-use-sample-datasets/) before starting to develop AML solutions.  
+
+
+[Next step: AzureML Experiments & Data Interaction](./003-lab-data-interact.md)
+[Next step: AzureML Experiments & Data Interaction](../003-lab-data-interact.md)
