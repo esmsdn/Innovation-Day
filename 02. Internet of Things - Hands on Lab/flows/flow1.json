@@ -1,0 +1,61 @@
+[
+    {
+        "id": "7c5ea796.dea638",
+        "type": "upm-grove-led",
+        "z": "6312bed0.eae51",
+        "name": "",
+        "platform": "0",
+        "mode": "output",
+        "pin": "2",
+        "interval": 1000,
+        "x": 548.8332977294922,
+        "y": 159.6666717529297,
+        "wires": []
+    },
+    {
+        "id": "a2decacd.ae9b28",
+        "type": "upm-grove-light",
+        "z": "6312bed0.eae51",
+        "name": "light",
+        "platform": "0",
+        "unit": "Lux",
+        "pin": "0",
+        "interval": "1000",
+        "x": 134.8333282470703,
+        "y": 121.00003051757812,
+        "wires": [
+            [
+                "f2557d81.59ce9",
+                "80c49faa.44024"
+            ]
+        ]
+    },
+    {
+        "id": "f2557d81.59ce9",
+        "type": "function",
+        "z": "6312bed0.eae51",
+        "name": "light threshold",
+        "func": "if (msg.payload<10){\n    msg.payload=1;\n}\nelse{\n    msg.payload=0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330.83331298828125,
+        "y": 136.3333282470703,
+        "wires": [
+            [
+                "7c5ea796.dea638"
+            ]
+        ]
+    },
+    {
+        "id": "80c49faa.44024",
+        "type": "debug",
+        "z": "6312bed0.eae51",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 294.8333282470703,
+        "y": 223.6666717529297,
+        "wires": []
+    }
+]
