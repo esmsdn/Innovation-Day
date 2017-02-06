@@ -174,11 +174,12 @@ Copy the provided connection string, we will use it later.
 Add a new function node and connect it to the Temperature output. Write this function inside. It creates a string with a JSON object that we will send through the wire to IoT Hub:
 
 ```
-msg.payload =JSON.stringify({
-    "sensor":"temp",
-    "value": msg.payload,
-    "timestamp": new Date()
-})
+msg.payload={
+    deviceId: msg.topic.split("/")[1],
+        location: "Palma",
+        sensorType: msg.topic.split("/")[0],
+        sensorValue: msg.payload
+}
 return msg;
 ```
 Then add an *azureiothub* node, and set the connection string. The one you got before for the device using the *iothub-explorer*. You will end with a diagram similar to this one:
@@ -189,7 +190,23 @@ Once you deploy the diagram, you will start sending data to your IoT Hub.
 
 ### 4. Visualize your data
 
-Now you need a dashboard where visualizing the data you are sending, but, before we will prepare it a little bit to show more relevant data, with average, minimum and maximum values. For this we will create an Azure Stream Analytics Job. In the Azure portal go create a new ASA:
+Now you need a dashboard where visualizing the data you are sending, but, before we will prepare it a little bit to show more relevant data, with average, minimum and maximum values.
+
+#### Event Hubs
+
+Event Hubs is a message pub/sub, we will use it to send and receive the averages to represent them inside the website. Create a new Event Hubs in the Azure portal with `New > Internet of Things > Event Hubs`, create a new unique namespace:
+
+![Event Hubs](./images/neweh.png "New Event Hub namespace")
+
+And then you must create an Event Hub, call it **thinglabseventhub**:
+
+![Event Hub](./images/createeh.png "Create Event Hub")
+
+We will use this Event Hub in the Stream Analytics as output and in the WebSite as input.
+
+#### Stream Analytics Creation
+
+We will create an Azure Stream Analytics Job. In the Azure portal go create a new ASA:
 
 ![ASA](./images/createasa.png "Create ASA")
 
@@ -197,10 +214,8 @@ Configure one input as the IoT Hub you created before:
 
 ![ASAInput](./images/asainput.png "Create ASA input")
 
-And for the output, we will need to create an Event Hub:
-
-
-And then configure the Event Hub as the output of the ASA:
+And for the output, we will use the Event Hub we created before.
+Configure the Event Hub as the output of the ASA:
 
 ![ASAOutput](./images/asaoutput.png "Create ASA output")
 
@@ -227,6 +242,8 @@ Finally you create a Query and set this select:
     SELECT * INTO [output] FROM ProcessedData
 
 Now you just start this ASA, this will start calculating the minimum, maximum and average every 5 seconds.
+
+#### Website Creation
 
 To show the result, we have prepared for you a website that draws the data using the d3js library. You will deploy this app to Azure.
 
@@ -272,7 +289,11 @@ iothub-explorer send EdisonNodeRed "Hello Node-RED"
 You can see the messages sent to your device in the *debug* tab:
 
 ![hello node-red](./images/hellonodered.png)
- 
+
+To make it more interesting, we will switch a light remotely, with the help of the recently created website.
+
+If you go to the site and set the name of the created device (EdisonNodeRed), you can send messages to the device from the website. Now we will connect this message to the blue LED:
+
 ## More
 
 You can run Node-RED in many platforms, including Azure: https://nodered.org/docs/platforms/azure
