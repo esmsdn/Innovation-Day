@@ -5,11 +5,10 @@
   * [REQUERIMIENTOS SOFTWARE](#requerimientos-software)
   * [OTROS REQUERIMIENTOS](#otros-requerimientos)
 * [CREACIÓN DE LA SOLUCIÓN INICIAL EN AZURE](#creaciÓn-de-la-soluciÓn-inicial-en-azure)
-* [BOT DE INTERACCIÓN BÁSICA](#bot-de-interacciÓn-basica)
+* [BOT DE INTERACCIÓN BÁSICA](#bot-de-interacciÓn-bÁsica)
 * [GENERACIÓN DEL SERVIDOR WEB PARA EL BOT](#generaciÓn-del-servidor-web-para-el-bot)
 * [INTERACCIÓN BÁSICA CON NUESTRO BOT](#interacciÓn-bÁsica-con-nuestro-bot)
 * [INTERACCIÓN AVANZADA CON NUESTRO BOT](#interacciÓn-avanzada-con-nuestro-bot)
-* [DESPLIEGUE DEL BOT EN AZURE](#despliegue-del-bot-en-azure)
 
 ## INTRODUCCIÓN
 En este hands-on-lab vamos a desarrollar un "bot" utilizando **Bot Framework SDK**

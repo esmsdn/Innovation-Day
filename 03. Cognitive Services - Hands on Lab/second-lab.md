@@ -4,6 +4,7 @@
 * [DESPLIEGUE FTP](#despliegue-ftp)
 * [CREACIÓN DEL MODELO CON LUIS](#creaciÓn-del-modelo-con-luis)
 * [INTEGRACIÓN DE LUIS CON EL BOT](#integraciÓn-de-luis-con-el-bot)
+* [DESPLIEGUE EN AZURE](#despliegue-en-azure)
 
 ## INTRODUCCIÓN
 En este segunda parte de nuestro laboratorio continuaremos con el despligue de 
