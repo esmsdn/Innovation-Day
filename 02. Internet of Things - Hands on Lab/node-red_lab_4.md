@@ -1,10 +1,10 @@
 # Innovation-Day: Internet of Things - Node-RED Lab 4. Visualize your data
 
-Now you need a dashboard where visualizing the data you are sending, but, before we will prepare it a little bit to show more relevant data, with average, minimum and maximum values.
+Now you need a dashboard where to visualize the data you are sending, but, before we will prepare the incoming telemetry to show more relevant data, with average, minimum and maximum values.
 
 ## Event Hubs
 
-Event Hubs is a message pub/sub, we will use it to send and receive the averages to represent them inside the website. Create a new Event Hubs in the Azure portal with `New > Internet of Things > Event Hubs`, create a new unique namespace:
+Event Hubs is a message pub/sub, we will use it to send and receive the averages to represent them inside the website. Create a new Event Hubs in the Azure portal with `New > Internet of Things > Event Hubs` and create a new unique namespace:
 
 ![Event Hubs](./images/neweh.png "New Event Hub namespace")
 
@@ -29,7 +29,7 @@ Configure the Event Hub as the output of the ASA:
 
 ![ASAOutput](./images/asaoutput.png "Create ASA output")
 
-Finally you create a Query and set this select:
+Finally you create a Query and with this *select* statement:
 
 ```sql
     WITH ProcessedData as (
@@ -53,11 +53,11 @@ Finally you create a Query and set this select:
     SELECT * INTO [output] FROM ProcessedData
 ```
 
-Now you just start this ASA, this will start calculating the minimum, maximum and average every 5 seconds.
+Now you just start this ASA with the *Start button*, this will start calculating the minimum, maximum and average of the incoming data in a 5 second window.
 
-## Website Creation
+## Visualization website
 
-To show the result, we have prepared for you a website that draws the data using the d3js library. You will deploy this app to Azure.
+To show the result, we have prepared for you a website that draws the data using the [D3.js](https://d3js.org) library. You will deploy this app to an Azure App Service:
 
 > This procedure uses the same site like the one found in [ThingLabs.io](http://thinglabs.io/labs/edison/grove/visualize/)
 
@@ -76,7 +76,15 @@ To show the result, we have prepared for you a website that draws the data using
 
 ![Activate WebSockets](./images/setwebsockets.png "Activate WebSockets")
 
-Deploy dashboard: https://github.com/ThingLabsIo/ThingLabs-IoT-Dashboard like in http://thinglabs.io/labs/edison/grove/visualize/
+5. Then you set this two properties in your *Application Settings* section:
+
+    a. Set THINGLABS_EVENTHUB_CONNSTRING to the connection string you got from your Event Hub
+    b. Set THINGLABS_IOTHUB_CONNSTRING to the general IoT Hub connection string you did set up before
+    c. Set THINGLABS_EVENTHUBNAME, only if your Event Hub is not named *thinglabseventhub*
+
+![Website Settings](./images/websitesettings.png "Website Settings")
+
+Now, go to your website and you will see the data in graphical form. You may have to wait some minutes to the ASA to start feeding values.
 
 
 ---

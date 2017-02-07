@@ -6,13 +6,13 @@ To make this data more useful, we will send it to the cloud. We will need some m
 * A visualization WebSite
 * The Azure node in your Node-RED Flow
 
-Let's do it:
-
 ## Create an IoT Hub
 
 > If you don't have an Azure Account you can get a [Free Trial](https://azure.microsoft.com/free).
 
-In your browser go to the Azure Portal at https://portal.azure.com and login. Create a new IoT Hub with `new > Internet of Things > IoT Hub`.
+In your browser go to the Azure Portal at <https://portal.azure.com> and login int your subscription.
+
+You create a new IoT Hub with the menu: `new > Internet of Things > IoT Hub`.
 
 ![IoTHub1](./images/IoTHub.png)
 
@@ -22,7 +22,7 @@ Once created, select the IoT Hub, click on the **Key** icon (Shared access polic
 
 ## Create the IoT Device
 
-Now we will create a secure device Id and Key to connect to the IoT Hub you have created. This is done from your computer using the IoT Hub owner credentials you just copied before.
+Now we will create a secure device Id and Key to connect securely to the IoT Hub you have created. This is done from your computer using the IoT Hub owner credentials you just copied before.
 
 From your computer, install the IoT Hub Explorer command line:
 
@@ -41,25 +41,27 @@ And you will get a screen like this:
 
 ![iothubcreatedevice](./images/iothubcreatedevice.png)
 
-Copy the provided connection string, we will use it later.
+Copy the provided connection string for your device, we will use it later.
 
-Add a new function node and connect it to the Temperature output. Write this function inside. It creates a string with a JSON object that we will send through the wire to IoT Hub:
+## Connect to IoT Hub from NodeRED
+
+In the Node-RED flow you created before, add a new function node and connect it to the Temperature output. Write this function inside, it creates a string with an object that we will send through the wire to IoT Hub:
 
 ```javascript
     msg.payload={
-        deviceId: msg.topic.split("/")[1],
-            location: "Palma",
-            sensorType: msg.topic.split("/")[0],
+        deviceId: "Id1",
+            location: "[Write your city here]",
+            sensorType: "temperature",
             sensorValue: msg.payload
     }
     return msg;
 ```
 
-Then add an *azureiothub* node, and set the connection string. The one you got before for the device using the *iothub-explorer*. You will end with a diagram similar to this one:
+Then add an *azureiothub* node, and set the connection string you got for your device, not the general IoT Hub connection string, but the particular one for the device. The one you got before for the device using the *iothub-explorer*. You will end with a diagram similar to this one:
 
 ![FormatPayload](./images/formatpayload.png "Payload to Azure")
 
-Once you deploy the diagram, you will start sending data to your IoT Hub.
+Once you deploy the diagram, you will start sending data to your IoT Hub, you will see a *Connected* message in the IoT Hub node.
 
 ---
 Continue to [Step 4](./node-red_lab_4.md) or return to [index](node-red_lab.md).
