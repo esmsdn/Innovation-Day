@@ -59,7 +59,7 @@ Click on the **Deploy** button, and you must see the two leds blinking.
 
 You can connect the nodes to create the program flow: react to events, send data to the cloud, modify a value, etc. We will use a button to turn the green LED on when the button is pressed.
 
-Add a *Grove Button* node, link it to the Green LED and set the Pin to D3:
+Add a *Grove Button* node, link it to the Green LED and set the Pin to D3, modify the **interval to 0** so the button acts immediately:
 
 ![Button](./images/grovebutton.png)
 
@@ -69,6 +69,8 @@ You have to change the configuration of the LED, so it doesn't blink but it reac
 
 Once deployed, you will be able to switch on the green light using the button.
 
+> You can import built flows like [this one](!./flows/ex1.json) from the clipboard using the Menu > Import > Clipboard
+
 ### Use the temperature in the workflow
 
 Now we will use the temperature sensor to change the LED state. Add a *Grove Temperature* node, a *function* node and a *debug* node as well, so we can see the temperatures in the debug tab.
@@ -77,7 +79,7 @@ Now we will use the temperature sensor to change the LED state. Add a *Grove Tem
 
 Configure the temperature sensor in the A0 pin and write this function inside the TempThreshold function:
 
-```
+```javascript
 var temp = msg.payload;
 if(temp>30){
     msg.payload=1;
@@ -89,6 +91,8 @@ return msg;
 ```
 
 This code changes the msg.payload, a special property that is used by the nodes and is passed between them, so we are transforming the output payload depending on the input value.
+
+> Find the full flow for this exercise [here](./flows/ex1_b.json).
 
 ---
 Continue to [Step 3](./node-red_lab_3.md) or return to [index](node-red_lab.md).

@@ -1,0 +1,49 @@
+[
+    {
+        "id": "346228ba.912208",
+        "type": "tab",
+        "label": "Exercise 1"
+    },
+    {
+        "id": "58e0278c.0cfd38",
+        "type": "upm-grove-led",
+        "z": "346228ba.912208",
+        "name": "Green Led",
+        "platform": "0",
+        "mode": "blink",
+        "pin": "2",
+        "interval": 1000,
+        "x": 572.3333129882812,
+        "y": 116.33332824707031,
+        "wires": []
+    },
+    {
+        "id": "5e54b5ab.45eedc",
+        "type": "upm-grove-led",
+        "z": "346228ba.912208",
+        "name": "Blue Led",
+        "platform": "0",
+        "mode": "output",
+        "pin": "4",
+        "interval": 1000,
+        "x": 558.3332977294922,
+        "y": 234.3333282470703,
+        "wires": []
+    },
+    {
+        "id": "fbd05202.9101f",
+        "type": "UPM-Grove-Button",
+        "z": "346228ba.912208",
+        "name": "",
+        "platform": "0",
+        "pin": "3",
+        "interval": "0",
+        "x": 236.8333282470703,
+        "y": 171.6666717529297,
+        "wires": [
+            [
+                "5e54b5ab.45eedc"
+            ]
+        ]
+    }
+]

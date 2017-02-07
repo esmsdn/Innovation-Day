@@ -1,0 +1,95 @@
+[
+    {
+        "id": "346228ba.912208",
+        "type": "tab",
+        "label": "Exercise 1"
+    },
+    {
+        "id": "58e0278c.0cfd38",
+        "type": "upm-grove-led",
+        "z": "346228ba.912208",
+        "name": "Green Led",
+        "platform": "0",
+        "mode": "output",
+        "pin": "2",
+        "interval": 1000,
+        "x": 614.3332977294922,
+        "y": 110.33332824707031,
+        "wires": []
+    },
+    {
+        "id": "5e54b5ab.45eedc",
+        "type": "upm-grove-led",
+        "z": "346228ba.912208",
+        "name": "Blue Led",
+        "platform": "0",
+        "mode": "output",
+        "pin": "4",
+        "interval": 1000,
+        "x": 558.3332977294922,
+        "y": 234.3333282470703,
+        "wires": []
+    },
+    {
+        "id": "fbd05202.9101f",
+        "type": "UPM-Grove-Button",
+        "z": "346228ba.912208",
+        "name": "",
+        "platform": "0",
+        "pin": "3",
+        "interval": "0",
+        "x": 198.8333282470703,
+        "y": 311.6666564941406,
+        "wires": [
+            [
+                "5e54b5ab.45eedc"
+            ]
+        ]
+    },
+    {
+        "id": "67ee5668.56ed78",
+        "type": "upm-grove-temperature",
+        "z": "346228ba.912208",
+        "name": "",
+        "platform": "0",
+        "unit": "C",
+        "pin": "0",
+        "interval": 1000,
+        "x": 146.8333282470703,
+        "y": 105,
+        "wires": [
+            [
+                "1cdaf968.30e4b7",
+                "a0eab2a9.0922"
+            ]
+        ]
+    },
+    {
+        "id": "1cdaf968.30e4b7",
+        "type": "function",
+        "z": "346228ba.912208",
+        "name": "temp threshold",
+        "func": "var temp = msg.payload;\nif(temp>30){\n    msg.payload=1;\n}\nelse{\n    msg.payload=0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 364.8333282470703,
+        "y": 101.66667175292969,
+        "wires": [
+            [
+                "58e0278c.0cfd38"
+            ]
+        ]
+    },
+    {
+        "id": "a0eab2a9.0922",
+        "type": "debug",
+        "z": "346228ba.912208",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 346.8333282470703,
+        "y": 172.3333282470703,
+        "wires": []
+    }
+]
