@@ -10,9 +10,9 @@
 En este segunda parte de nuestro laboratorio continuaremos con el despligue de 
 nuestro bot en la instancia de Bot Service que creamos en nuestra subscripción de Azure.
 
-#### NOTA
-**Esta segunda parte del laboratorio requiere haber completado con éxito las 
-instrucciones del [laboratorio anterior](./README.md).**
+> NOTA
+Esta segunda parte del laboratorio requiere haber completado con éxito las 
+instrucciones del [laboratorio anterior](./README.md)
 
 ## OBTENCIÓN CREDENCIALES DE DESPLIEGUE
 
@@ -54,12 +54,12 @@ En este caso hemos utilizado [Filezilla](https://filezilla-project.org)
 
 Una vez configurado el cliente FTP, accedemos a nuestro sitio en Azure.
 
-#### NOTA
-**Es posible que la primera vez que conectamos, si utilizamos FTP sobre TLS se 
+> NOTA
+Es posible que la primera vez que conectamos, si utilizamos FTP sobre TLS se 
 nos pida confirmación de aceptación del certificado de Azure. Si es así, 
 simplemente aceptaremos el certificado, y opcionalmente marcaremos la opción
 de confiar en el mismo certificado en sucesivas conexiones si lo 
-consideramos oportuno**
+consideramos oportuno
 
 Si todo ha ido correctamente, estaremos conectados a nuestro sitio en Azure, 
 tal y como muestra la siguiente imagen.
@@ -116,8 +116,8 @@ aplicación funcionará para idioma Castellano.
 Pulsamos el botón de `Add App`y pasaremos a una página donde definiremos y
 gestionaremos el modelo que soportará nuestra aplicación.
 
-#### NOTA
-*En este laboratorio no entraremos en detalle sobre cómo definir y gestionar
+> NOTA
+En este laboratorio no entraremos en detalle sobre cómo definir y gestionar
 modelos complejos para reconocimiento de lenguaje natural. Si se tiene interés 
 en profundizar más se recomienda seguir el
 [Tutorial de LUIS](http://www.luis.ai/Help)
@@ -213,7 +213,7 @@ Estas dependencias permitirán a nuestro bot pedir información financiera sobre
 compañía mediante los servicios de **Yahoo Finance** y su noticias asociadas mediante el 
 API de **Bing Search**.
 
-#### NOTA 
+> NOTA 
 Para poder utilizar los servicios de búsqueda de noticias de Bing, es necesario
 disponer de un *API Key* para el servicio. Dicho servicio es parte de los 
 *Cognitive Services* por lo que podemos solicitar dicha clave en el 

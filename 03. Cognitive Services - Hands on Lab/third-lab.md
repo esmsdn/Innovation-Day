@@ -7,7 +7,7 @@
 En esta tercera parte de nuestro laboratorio integraremos nuestro bot para que esté
 disponible a través de varios canales.
 
-#### NOTA
+> NOTA
 **Esta segunda parte del laboratorio requiere haber completado con éxito las 
 instrucciones del [laboratorio anterior](./second-lab.md).**
 
@@ -26,7 +26,7 @@ Una vez localizado, pulsamos en el enlace de *Add* para configurar el canal. En
 nuestro navegador se abrirá una nueva pestaña desde la que podremos configurar
 la disponibilidad de nuestro bot en en canal de Skype.
 
-#### NOTA 
+> NOTA 
 Si no estuvieramos identificados dentro de la página de Botframework, se nos 
 solicitarían los datos de acceso.
 
