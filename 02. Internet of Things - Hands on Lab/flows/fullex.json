@@ -1,0 +1,265 @@
+[
+    {
+        "id": "bd40ada2.b94b8",
+        "type": "tab",
+        "label": "Full Exercise"
+    },
+    {
+        "id": "1e1498bc.43d117",
+        "type": "upm-grove-temperature",
+        "z": "bd40ada2.b94b8",
+        "name": "temperature",
+        "platform": "0",
+        "unit": "C",
+        "pin": "1",
+        "interval": "2000",
+        "x": 117,
+        "y": 70.33331298828125,
+        "wires": [
+            [
+                "8f73651d.be8a48"
+            ]
+        ]
+    },
+    {
+        "id": "2b9c5b82.0a6534",
+        "type": "join",
+        "z": "bd40ada2.b94b8",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": " : ",
+        "timeout": "1",
+        "count": "",
+        "x": 599.3333282470703,
+        "y": 90.99993896484375,
+        "wires": [
+            [
+                "c736bd7d.adaad"
+            ]
+        ]
+    },
+    {
+        "id": "bd8eaac2.2edeb8",
+        "type": "upm-grove-led",
+        "z": "bd40ada2.b94b8",
+        "name": "blue",
+        "platform": "0",
+        "mode": "output",
+        "pin": "4",
+        "interval": 1000,
+        "x": 1060.9999084472656,
+        "y": 564.3332366943359,
+        "wires": []
+    },
+    {
+        "id": "c451b889.a48318",
+        "type": "azureiothub",
+        "z": "bd40ada2.b94b8",
+        "name": "Azure IoT Hub",
+        "protocol": "mqtt",
+        "x": 496.9999237060547,
+        "y": 404.99986267089844,
+        "wires": [
+            [
+                "8eef71dc.26989"
+            ]
+        ]
+    },
+    {
+        "id": "c736bd7d.adaad",
+        "type": "json",
+        "z": "bd40ada2.b94b8",
+        "name": "",
+        "x": 770.9999847412109,
+        "y": 92.9998779296875,
+        "wires": [
+            [
+                "1deb772e.657c39"
+            ]
+        ]
+    },
+    {
+        "id": "8f73651d.be8a48",
+        "type": "function",
+        "z": "bd40ada2.b94b8",
+        "name": "createThinglabsPayload",
+        "func": "msg.payload={\n    deviceId: msg.topic.split(\"/\")[1],\n        location: \"Palma\",\n        sensorType: msg.topic.split(\"/\")[0],\n        sensorValue: msg.payload\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 372.99998474121094,
+        "y": 82.99995422363281,
+        "wires": [
+            [
+                "2b9c5b82.0a6534"
+            ]
+        ]
+    },
+    {
+        "id": "2f0ee76c.3b37d8",
+        "type": "debug",
+        "z": "bd40ada2.b94b8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 760.9999084472656,
+        "y": 463.6666259765625,
+        "wires": []
+    },
+    {
+        "id": "8eef71dc.26989",
+        "type": "function",
+        "z": "bd40ada2.b94b8",
+        "name": "ToString",
+        "func": "msg.payload = String.fromCharCode.apply(null, new Uint16Array(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 601.0000305175781,
+        "y": 524.333251953125,
+        "wires": [
+            [
+                "2f0ee76c.3b37d8",
+                "74e08568.8a104c"
+            ]
+        ]
+    },
+    {
+        "id": "920529d2.027378",
+        "type": "change",
+        "z": "bd40ada2.b94b8",
+        "name": "send ledState to led",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.ledState",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 927.6665954589844,
+        "y": 638.9998626708984,
+        "wires": [
+            [
+                "bd8eaac2.2edeb8"
+            ]
+        ]
+    },
+    {
+        "id": "74e08568.8a104c",
+        "type": "json",
+        "z": "bd40ada2.b94b8",
+        "name": "",
+        "x": 749.9999694824219,
+        "y": 582.9998321533203,
+        "wires": [
+            [
+                "920529d2.027378"
+            ]
+        ]
+    },
+    {
+        "id": "1deb772e.657c39",
+        "type": "switch",
+        "z": "bd40ada2.b94b8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "neq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 1017.0000457763672,
+        "y": 88.99993896484375,
+        "wires": [
+            [
+                "c451b889.a48318"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "446ba7f7.4b9e68",
+        "type": "inject",
+        "z": "bd40ada2.b94b8",
+        "name": "on",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 261,
+        "y": 187.6666259765625,
+        "wires": [
+            [
+                "a2940cc.37d07f"
+            ]
+        ]
+    },
+    {
+        "id": "8d9f111b.86e76",
+        "type": "inject",
+        "z": "bd40ada2.b94b8",
+        "name": "off",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 259.00001525878906,
+        "y": 261.6666259765625,
+        "wires": [
+            [
+                "a2940cc.37d07f"
+            ]
+        ]
+    },
+    {
+        "id": "a2940cc.37d07f",
+        "type": "change",
+        "z": "bd40ada2.b94b8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 499.00001525878906,
+        "y": 229.6666259765625,
+        "wires": [
+            [
+                "1deb772e.657c39"
+            ]
+        ]
+    }
+]

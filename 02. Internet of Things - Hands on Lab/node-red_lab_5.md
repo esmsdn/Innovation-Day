@@ -25,7 +25,20 @@ You can see the messages sent to your device in the *debug* tab:
 
 To make it more interesting, we will switch a light remotely, with the help of the recently created website.
 
-If you go to the site and set the name of the created device (EdisonNodeRed), you can send messages to the device from the website. Now we will connect this message to the blue LED:
+## Connecting a LED to manage it remotely
+
+In Node-RED we will convert the string to an object again with the *JSON* node and a *Change* node that will move the information in the *ledState* property directly inside the payload when configured like this:
+
+![Message to LED](./images/msgtoled.png "Message to LED")
+
+Connect at the end your blue LED and deploy it.
+
+If you go to the site and set the name of the created device (EdisonNodeRed), you can send messages to the device from the website.
+
+![Remote Led](./images/remoteled.png "Remote LED")
+
+> Get the full Flow that you can paste in Node-RED [here](./flows/fullex.json).
+
 
 ---
 Return to [index](node-red_lab.md).
