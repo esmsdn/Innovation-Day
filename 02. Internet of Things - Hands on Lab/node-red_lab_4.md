@@ -76,11 +76,11 @@ To show the result, we have prepared for you a website that draws the data using
 
 ![Activate WebSockets](./images/setwebsockets.png "Activate WebSockets")
 
-5. Then you set this two properties in your *Application Settings* section:
+5. Then you set this two or three properties in your *Application Settings* section:
 
-    a. Set THINGLABS_EVENTHUB_CONNSTRING to the connection string you got from your Event Hub
-    b. Set THINGLABS_IOTHUB_CONNSTRING to the general IoT Hub connection string you did set up before
-    c. Set THINGLABS_EVENTHUBNAME, only if your Event Hub is not named *thinglabseventhub*
+    * Set THINGLABS_EVENTHUB_CONNSTRING to the connection string you got from your Event Hub
+    * Set THINGLABS_IOTHUB_CONNSTRING to the general IoT Hub connection string you did set up before
+    * Set THINGLABS_EVENTHUBNAME, but only if your Event Hub is not named *thinglabseventhub*
 
 ![Website Settings](./images/websitesettings.png "Website Settings")
 
