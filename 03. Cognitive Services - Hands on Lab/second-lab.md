@@ -91,7 +91,6 @@ el emulador de bot embebido en el portal de Azure.
 ## CREACIÓN DEL MODELO CON LUIS
 
 ### Paso 3
-
 En el siguiente apartado vamos a empezar a utilizar el servicio de **Reconocimiento 
 del Lenguaje (LUIS)**. Para ello accederemos a [www.luis.ai](http://www.luis.ai) 
 y procederemos identificarnos como desarrollador. Si no tenemos cuenta deberemos
@@ -123,7 +122,6 @@ en profundizar más se recomienda seguir el
 [Tutorial de LUIS](http://www.luis.ai/Help)
 
 ### Paso 4 
-
 Vamos a empezar por añadir ciertas entidades predefinidas dentro de nuestra 
 aplicación. Las entidades predefinidas permiten a nuestro modelo reconocer
 cierto tipos de entidades sin necesidad de definirlas ni entrenar nuestro modelo
@@ -135,24 +133,21 @@ las entidades `datetime`, `number` y `money`. Finalizamos pulsando el botón `Ok
 ![Entidades predefinidas](./images/lab2/img1-step4.png)
 
 ### Paso 5
-
 Añadiremos también algunas entidades definidas por nosotros para su utilización 
 posterior. Pulsamos en el botón de `Entities` y añadimos una entidad denominada 
-`stockid`que n os servirá para entender *tickers* de bolsa.
+`stockid` que n os servirá para entender *tickers* de bolsa.
 
 ![Definición de entidades](./images/lab2/img1-step5.png)
 
 ### Paso 6
-
 A continuación, definiremos cuales serán los `intents` que queremos que nuestro
 modelo de LUIS reconozca. Los `intents` no son más que las necesidades o las
 intenciones que nuestros interlocutores quieren expresar cuando interactúan 
 con nuestro modelo.
 
-En nuestro bot vamos a intentar reconocer cuando alguien quiere saber su
-localización actual, también reconoceremos cuando un usuario quiere saber la 
-cotización de una acción (*stock*) y le permitiremos preguntar por el día de la 
-semana que fue en una fecha concreta.
+En nuestro bot vamos a intentar reconocer cuando alguien quiere  saber la 
+cotización de una acción (*stock*) y le permitiremos solicitar ayuda sobre el 
+uso del bot.
 
 Empezamos por definir el *intent* `getstockquote`. Pulsamos en el botón `Intents` 
 y rellenamos el formulario que nos aparece.
@@ -198,7 +193,6 @@ En este apartado modificaremos el bot que tenemos desarrollado para que integre
 con el modelo de reconocimiento del lenguaje que acabamos de definir en LUIS.
 
 ### Paso 8
-
 Primero añadiremos un par de dependencias NPM a nuestro proyecto. Para ello
 nos posicionamos dentro del directorio donde está nuestro fichero `index.js`
 y abrimos una consola de comandos. Dentro de dicha consola tecleamos las siguientes
@@ -227,6 +221,7 @@ sustituimos el código existente por el siguiente:
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 const util = require('util');
+// DO NOT FORGET TO UPDATE WITH YOUR OWN BING NEWS API KEY!!!
 var bing = require('node-bing-api')({ accKey: "5d6c5bed99364dd28fb726b38201b69a" });
 var yahooFinance = require('yahoo-finance');
 
@@ -244,6 +239,7 @@ var bot = new builder.UniversalBot(connector, {
     localizerSettings: { defaultLocale: "es" }
 });
 
+// DO NOT FORGET TO UPDATE WITH YOUR OWN LUIS API KEY 
 var model = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/e912cce5-39d4-4a68-9240-6ee4213d44bc?subscription-key=d41eb70bf2db42c6869a3b0fd6e6ffad";
 var recognizer = new builder.LuisRecognizer(model);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] });
@@ -331,6 +327,12 @@ if (useEmulator) {
 }
 ```
 
+> **NOTA** ES IMPORTANTE RECORDAR QUE HAY QUE ACTUALIZAR EL CÓDIGO FUENTE ANTERIOR
+CON LAS CLAVES DE ACCESO QUE HAYAMOS GENERADO POR NUESTRA CUENTA PARA **LUIS** 
+Y PARA EL API DE **BING NEWS**. 
+De lo contrario estaremos utilizando las utilizadas durante la elaboración de este
+HoL que es posible que ya no estén disponibles.
+
 Si se observa el código adjunto, nuestro bot define dos dialogos basados en 
 `intents`. Uno de ellos gestiona el dialogo para obtener la cotización y las 
 noticias asociadas de un *ticker* y el segundo es el diálogo cuando el usuario
@@ -356,13 +358,11 @@ que tenemos en Azure.
 ## DESPLIEGUE EN AZURE 
 
 ### Paso 9
-
 Ahora, utilizando FTP procedemos a subir los ficheros `package.json` e `index.js`
 dentro del correspondiente directorio de nuestra instancia tal y como realizamos
 en el [Paso 2 de este laboratorio](#Paso-2)
 
 ### Paso 10
-
 Una vez subido el código, debemos forzar a que la aplicación restaure sus 
 dependencias NPM en Azure. Para ello abrimos el *blade* de configuración avanzada
 de nuestro bot y seleccionamos la opción `Console`
@@ -389,5 +389,3 @@ Ahora ya solo resta, publicar nuestro bot para poderlo conectar en diversos
 canales y que la gente lo pueda acceder.
 
 Eso lo haremos en la [tercera parte de nuestro laboratorio](./third-lab.md)
- 
-
