@@ -7,8 +7,8 @@
 En esta tercera parte de nuestro laboratorio integraremos nuestro bot para que esté
 disponible a través de varios canales.
 
-> NOTA
-**Esta segunda parte del laboratorio requiere haber completado con éxito las 
+> **NOTA
+Esta segunda parte del laboratorio requiere haber completado con éxito las 
 instrucciones del [laboratorio anterior](./second-lab.md).**
 
 ## CONFIGURACIÓN DE CANALES
@@ -21,14 +21,12 @@ Dentro de dicha pestaña, buscamos entre los canales disponibles el de *Skype*
 ![Blade de configuración de canales](./images/lab3/img1-step1.png)
 
 ### Paso 2
-
 Una vez localizado, pulsamos en el enlace de *Add* para configurar el canal. En 
 nuestro navegador se abrirá una nueva pestaña desde la que podremos configurar
 la disponibilidad de nuestro bot en en canal de Skype.
 
-> NOTA 
-Si no estuvieramos identificados dentro de la página de Botframework, se nos 
-solicitarían los datos de acceso.
+> **NOTA** Si no estuvieramos identificados dentro de la página de Botframework,
+ se nos solicitarían los datos de acceso.
 
 ![Pantalla de configuración de canal de Skype](./images/lab3/img1-step2.png)
 
@@ -51,7 +49,6 @@ contactos de nuestra cuenta de **Skype**
 ![Añadir bot a nuestro canal de Skype](./images/lab3/img2-step3.png)
 
 ### Paso 4
-
 Pulsamos en el enlace para añadir el bot a nuestros contactos de Skype. Nos
 aparecerá una nueva ventana en la que tendremos un botón para ello.
 
@@ -63,7 +60,6 @@ añadirle el bot como contacto.
 ![Login cuenta Skype](./images/lab3/img2-step4.png)
 
 ### Paso 5
-
 Una vez añadido el bot, tendremos una página de confirmación y podremos acceder
 a nuestra cuenta de **Skype** y entre nuestros contactos tendremos disponible
 nuestro bot con el que podremos interactuar sin problemas.

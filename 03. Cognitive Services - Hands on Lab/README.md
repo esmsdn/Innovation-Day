@@ -54,7 +54,6 @@ opciones del portal `New > Intelligence+analytics > Bot Service`
 ![Creación de un Bot Service](./images/img1-step13.png)
 
 ### Paso 2 
-
 Nos aparecerá un cuadro de diálogo donde deberemos introducir los datos básicos
 de identificación y ubicación de nuestro bot.
 
@@ -98,7 +97,6 @@ y seleccionaremos la plantilla básica. Finalmente pulsamos sobre el botón de `
 ![Progreso de creación de bot](./images/img7-step14.png)
 
 ### Paso 3
-
 Al crear la instancia de **Bot Service** tendremos ahora un *blade* desde el 
 que tendremos las herramientas necesarias para desarrollar, integrar, configurar 
 y publicar nuestro bot.
@@ -282,7 +280,7 @@ predefinido dentro del mismo. Posteriormente le dotaremos de una interacción
 un poco más inteligente y también haremos que reconozca el lenguaje natural
 
 ### Paso 9
-Vamos a reemplazar el código de nuestro fichero `server.js` por el siguiente:
+Vamos a reemplazar el código de nuestro fichero `index.js` por el siguiente:
 
 ```javascript
 "use strict";
@@ -341,7 +339,7 @@ if (useEmulator) {
 
 ```
 
-Si observamos con detenimiento el código fuente, veremos claramente nuestra 
+Si observamos con detenimiento el código fuente, veremos claramente nuestro 
 *waterfall* dentro de la llamada a `new builder.UniversalBot(conector,[...`
 
 Ahí podemos apreciar una *cascada* de funciones anónimas que definen el diálogo
