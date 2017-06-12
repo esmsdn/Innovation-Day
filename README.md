@@ -1,3 +1,5 @@
+![Header](./01.%20Introduction-decks/00-header.png)
+
 # Innovation-Day
 ISVs Innovation Day decks and Hands-on-Labs instructions
 
