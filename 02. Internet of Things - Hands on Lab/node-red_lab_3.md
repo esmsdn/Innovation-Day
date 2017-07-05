@@ -57,7 +57,7 @@ In the Node-RED flow you created before, add a new function node and connect it 
     return msg;
 ```
 
-Then add an *azureiothub* node, and set the connection string you got for your device, not the general IoT Hub connection string, but the particular one for the device. The one you got before for the device using the *iothub-explorer*. You will end with a diagram similar to this one:
+Then add an *azureiothub* node, and set the connection string you got for your device, not the general IoT Hub connection string, but the particular one for the device. The one you got before for the device using the *iothub-explorer*. Finally, prior to sending the payload you must convert it to a JSON string, this can be done directly in your function using the `JSON.stringify` method or you can add a simple *JSON node* that will convert it for you. You will end with a diagram similar to this one:
 
 ![FormatPayload](./images/formatpayload.png "Payload to Azure")
 
