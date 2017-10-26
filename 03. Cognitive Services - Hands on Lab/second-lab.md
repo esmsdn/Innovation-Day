@@ -225,7 +225,7 @@ const util = require('util');
 var bing = require('node-bing-api')({ accKey: "5d6c5bed99364dd28fb726b38201b69a" });
 var yahooFinance = require('yahoo-finance');
 
-var useEmulator = (process.env.NODE_ENV == 'development');
+var useEmulator = (!process.env.NODE_ENV) ? true : (process.env.NODE_ENV == 'development');
 
 // Create chat bot
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
