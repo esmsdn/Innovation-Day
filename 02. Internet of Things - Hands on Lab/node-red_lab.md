@@ -5,7 +5,7 @@
 With this step-by-step lab you will work with a Node RED instance inside an Intel Edison Board to gather telemetry from sensors, send it to the cloud, represent it and send cloud to device messages as well:
 
 1. [Prerequisites: Install the Intel Edison Drivers](./installedison.md)
-1. [Check your Intel Edison with Node-RED](./node-red_lab_1.md)
+1. [Check if your Intel Edison has Node-RED installed](./node-red_lab_1.md)
 1. [Work with sensors](./node-red_lab_2.md)
 1. [Send data to the cloud](./node-red_lab_3.md)
 1. [Visualize your data](./node-red_lab_4.md)
