@@ -7,7 +7,7 @@ This lab is using the Grove Starter Kit for Intel Edison, so you may have to pre
 For using node-red with an Intel Edison board you will have to login inside the board using an SSH client like [Putty](http://www.putty.org/) or similar. Your lab trainer may have already prepared your Intel Edison device with a Node-RED server. You just need to go to your Edison IP Address and open a browser in the 1880 port like this:
 
 1. Type the ```ifconfig``` command inside your Intel Edison and take your *wlan* address. If you don't have an IP4 address, try to connect to the local WiFi again with the ```configure_edison --wifi``` command.
-1. Open a browser to your board address *<http://[[YourBoardIPAddress]]:1880>*
+1. Open a browser to your board address *http://[YourBoardIPAddress]:1880*
 
 If nothing opens, and you are sure your board is connected to the WiFi, follow these steps:
 
