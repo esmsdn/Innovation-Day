@@ -20,30 +20,47 @@ Once created, select the IoT Hub, click on the **Key** icon (Shared access polic
 
 ![IoTHub3](./images/IoTHub3.png)
 
+*REMEMBER: This connection string is used to manage the IoT Hub, not to be used on devices*
+
 ## Create the IoT Device
 
-Now we will create a secure device Id and Key to connect securely to the IoT Hub you have created. This is done from your computer using the IoT Hub owner credentials you just copied before.
+It is now possible to create devices directly in the Azure portal. From your IoTHub blade, scroll down to Device Explorer under EXPLORERS and add a new device. Type a unique name for your device and make sure "Symmetric Key" and "Auto Generate Keys" are selected. You also want to create and ENABLE the device in your IoT hub, not create it but leaving it disabled:
 
-From your computer, install the IoT Hub Explorer command line:
+![IoTHub3a](./images/IoTHub3a.png)
+
+After the device has been created, you get the precious connection string that allows your board to connect to your IoT Hub and be recognized as this device:
+
+![IoTHub3a](./images/IoTHub3b.png)
+
+## Install IoTHub Explorer
+
+Now we will install IoTHub Explorer, a tool to monitor your IoT Hub. You will connect to your IoTHub using the IoT Hub owner credentials you just copied before.
+
+You will do this in a CMD window running in your computer, NOT in the SSH session connected to your Edison module:
 
 ```bash
     npm install -g iothub-explorer
 ```
 
-Now, run the following command to get a connection string unique for your device, this allows maximum device security and bi-directional communication with the device:
+Now, run the following command to login to your IoTHub:
 
 ```bash
-    iothub-explorer login "[YOUR CONNECTION STRING]"
-    iothub-explorer create EdisonNodeRed --connection-string
+    iothub-explorer login "[YOUR IOTHUB CONNECTION STRING]"
 ```
 
-And you will get a screen like this:
+To check the existence of the Device you just created in the IoT Hub with, run:
 
-![iothubcreatedevice](./images/iothubcreatedevice.png)
+```bash
+    iothub-explorer list
+```
 
-Copy the provided connection string for your device, we will use it later.
+To monitor the messages sent by your device to the IoT Hub, run the following command and leave it running:
 
-## Connect to IoT Hub from NodeRED
+```bash
+iothub-explorer monitor-events -l "[YOUR IOTHUB CONNECTION STRING]"
+```
+
+## Connect to IoT Hub from Node-RED
 
 In the Node-RED flow you created before, add a new function node and connect it to the Temperature output. Write this function inside, it creates a string with an object that we will send through the wire to IoT Hub:
 
@@ -57,11 +74,13 @@ In the Node-RED flow you created before, add a new function node and connect it 
     return msg;
 ```
 
-Then add an *azureiothub* node, and set the connection string you got for your device, not the general IoT Hub connection string, but the particular one for the device. The one you got before for the device using the *iothub-explorer*. Finally, prior to sending the payload you must convert it to a JSON string, this can be done directly in your function using the `JSON.stringify` method or you can add a simple *JSON node* that will convert it for you. You will end with a diagram similar to this one:
+Then add an *azureiothub* node, and set the connection string you got for your device. Do not use the general IoT Hub connection string which is intended for managing the hub, but the particular connection string for the device you created previously. Finally, prior to sending the payload you must convert it to a JSON string, this can be done directly in your function using the `JSON.stringify` method or you can add a simple *JSON node* that will convert it for you. You will end with a diagram similar to this one:
 
 ![FormatPayload](./images/formatpayload.png "Payload to Azure")
 
 Once you deploy the diagram, you will start sending data to your IoT Hub, you will see a *Connected* message in the IoT Hub node.
+
+*NOTE: If you are using a FREE tier IoTHub, you might want to check the delay in the "Grove Temperature" node so you don't reach the 8K message limit before finishing the lab.*
 
 ---
 Continue to [Step 4](./node-red_lab_4.md) or return to [index](node-red_lab.md).

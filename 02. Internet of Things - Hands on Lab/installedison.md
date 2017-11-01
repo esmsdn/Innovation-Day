@@ -1,39 +1,34 @@
-# Innovation-Day: Internet of Things - Install Edison
+# Innovation-Day: Internet of Things - Install Edison&reg;
 
-You will need:
+You will need to download and install the following drivers:
 
-* A ssh client (like [putty](http://www.putty.org/))
-* The Intel&reg; Edison Drivers: https://software.intel.com/en-us/iot/hardware/edison/downloads
+* [The Edison&reg; USB driver (J16 connector)](https://communities.intel.com/external-link.jspa?url=https%3A%2F%2Fdownloadmirror.intel.com%2F26993%2Feng%2FIntelEdisonDriverSetup1.2.1.exe) 
+(*not required for this lab*)
+* [The FTDI USB driver (J3 connector)](http://www.ftdichip.com/Drivers/CDM/CDM21226_Setup.zip)
 
-## Drivers Configuration
+## Download and run a SSH Client
 
-During the drivers configuration you will be able to change the board name and the password for the *root* user.
+A SSH client such as [PuTTY](http://www.putty.org/)) is required to connect to the OS in the Edison compute module to the Wifi network.
 
-![Intel Drivers](./images/inteldrivers.png "Intel&reg; Edison Board Configuration Tool")
+## Connecting to your Edison&reg; Board
 
-> If your event host has already set a password for you, ask before changing it :smiley:
+Connect the USB cable to J3, the mini-USB connector closest to the edge of the board.
 
-You have a full step by step installation guide here: https://software.intel.com/en-us/installing-drivers-for-intel-edison-board-with-windows
-
-## Connecting to your Edison Board
-
-Once installed you will have something like this in your device manager, with several Serial Ports, the two Intel Edison ports are for debugging, but there is a *USB Serial Port(COMXX)*:
+You will need to find the serial COM number by opening Device Manager and looking in the "Ports (COM & LPT)" section:
 
 ![ports](./images/ports.png "Serial Ports")
 
-The red mark indicates the COM port you will need to setup in your ssh client, take a look on which port you have in your computer and use it as the port in the putty configuration:
+You will connect to the module with PuTTY via serial connection at a speed 115200 bps. You might want to save the connection settings to the DEFAULT SETTINGS connection so won't need to set them up again in the future:
 
 ![putty](./images/serial.png)
 
-Once you have connected through serial with the COM port at 115200 bauds with putty, you will be asked for credentials (you may have to press the enter key to get a message):
+Once you open the connection press enter to get a reply from the module. The original Yokto image comes ready with a blank password for login but in our labs, we usually set "IntelEdison" as the password for the boards before handling them to atendees:
 
 ![login](./images/edisonlogin.png)
 
-The default user is **root** and the password is the one you did set during the setup. (*Note: in our labs, we usually set IntelEdison as default password for all the boards*)
-
 ## WiFi Configuration
 
-If you didn't configure your WiFi during the first setup, you still can configure it from your board using the command:
+Now set up the Wifi connection by running the command:
 
 ``` 
     configure_edison --wifi

@@ -16,10 +16,11 @@ Then connect the output of the *Azure IoT Hub* node you already have to the func
 Now from your command line you can send a message to your device:
 
 ```bash
-iothub-explorer send EdisonNodeRed "Hello Node-RED"
+iothub-explorer send <device_ID> "Hello Node-RED"
 ```
+You might need to login again with IoTHub-Exporer if your session has expired.
 
-You can see the messages sent to your device in the *debug* tab:
+Inmediately, you will see the message sent to your device in the *debug* tab:
 
 ![hello node-red](./images/hellonodered.png)
 
@@ -33,7 +34,7 @@ In Node-RED we will convert the string to an object again with the *JSON* node a
 
 Connect at the end your blue LED and deploy it.
 
-If you go to the site and set the name of the created device (EdisonNodeRed), you can send messages to the device from the website.
+If you go to the site and set the name of your device, you can send messages to the device from the website.
 
 ![Remote Led](./images/remoteled.png "Remote LED")
 

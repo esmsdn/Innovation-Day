@@ -4,7 +4,7 @@ Now that you have your environment completely prepared you can begin this step-b
 
 ## 1. Connect the Grove Kit sensors
 
-Start by connecting the Grove Base Shield to your Edison Arduino Board:
+Start by connecting the Grove Base Shield to your Edison&reg; Arduino Board:
 
 ![BaseShield](./images/baseshield.jpg "Grove Base Shield")
 
@@ -81,7 +81,7 @@ Configure the temperature sensor in the A0 pin and write this function inside th
 
 ```javascript
 var temp = msg.payload;
-if(temp>30){
+if(temp>15){
     msg.payload=1;
 }
 else{
